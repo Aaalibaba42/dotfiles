@@ -1,0 +1,12 @@
+[IPv4]
+DNS = 1.1.1.1
+
+[Security]
+EAP-Method=PEAP
+EAP-Identity=anonymous
+EAP-PEAP-Phase2-Method=MSCHAPV2
+EAP-PEAP-Phase2-Identity= # FIXME
+EAP-PEAP-Phase2-Password= # FIXME
+
+[Settings]
+AutoConnect=true

@@ -1,0 +1,72 @@
+* {
+	font-size: 25px;
+	font-family: monospace;
+}
+
+window#waybar {
+	background: #0f111b;
+	color: #ecf0c1;
+}
+
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+	color: #16172d;
+}
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	color: #0f111b;
+	background: #16172d;
+}
+
+#workspaces,
+#clock.1,
+#clock.2,
+#clock.3,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#tray {
+	background: #16172d;
+}
+
+#workspaces button {
+	padding: 0 2px;
+	color: #ecf0c1;
+    padding: 0 30px;
+}
+#workspaces button:hover {
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+#workspaces button:hover {
+	background: #30365f;
+	border: #30365f;
+	padding: 0 55px;
+}
+
+#pulseaudio {
+	color: #00a3cc;
+}
+#memory {
+	color: #7a5ccc;
+}
+#cpu {
+	color: #b3a1e6;
+}
+#battery {
+	color: #859900;
+}
+#disk {
+	color: #e39400;
+}
+
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk {
+	padding: 0 15px;
+}
