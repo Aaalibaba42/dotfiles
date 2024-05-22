@@ -1,11 +1,25 @@
 * {
 	font-size: 25px;
-	font-family: monospace;
+	font-family: "Hack Nerd Font Mono";
 }
 
 window#waybar {
 	background: #0f111b;
 	color: #ecf0c1;
+}
+
+#custom-menu,
+#custom-right-arrow-dark,
+#custom-left-arrow-dark,
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	font-size: 35px;
+}
+
+#custom-menu {
+	background: #1793d0;
+    color: #000000;
+    padding: 0 10px;
 }
 
 #custom-right-arrow-dark,
@@ -23,6 +37,7 @@ window#waybar {
 #clock.2,
 #clock.3,
 #pulseaudio,
+#backlight,
 #memory,
 #cpu,
 #battery,
@@ -32,9 +47,8 @@ window#waybar {
 }
 
 #workspaces button {
-	padding: 0 2px;
 	color: #ecf0c1;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 #workspaces button:hover {
 	box-shadow: inherit;
@@ -43,11 +57,14 @@ window#waybar {
 #workspaces button:hover {
 	background: #30365f;
 	border: #30365f;
-	padding: 0 55px;
+	padding: 0 40px;
 }
 
 #pulseaudio {
 	color: #00a3cc;
+}
+#backlight {
+	color: #f2ce00;
 }
 #memory {
 	color: #7a5ccc;
@@ -55,18 +72,30 @@ window#waybar {
 #cpu {
 	color: #b3a1e6;
 }
-#battery {
-	color: #859900;
+
+#battery.full {
+	color: #007a39;
 }
+#battery.good {
+	color: #5ccc96;
+}
+#battery.warning {
+	color: #e39400;
+}
+#battery.critical {
+	color: #e33400;
+}
+
 #disk {
 	color: #e39400;
 }
 
 #clock,
 #pulseaudio,
+#backlight,
 #memory,
 #cpu,
 #battery,
 #disk {
-	padding: 0 15px;
+	padding: 0 10px;
 }
