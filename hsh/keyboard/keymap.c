@@ -178,7 +178,7 @@ XXX, XXX,        XXX,        UC(0x21D0), UC(0x21D2),                            
 ),
 */
 
-// IA generated to test it out
+// IA generated to test out their capabilities
 [3] = LAYOUT_ergodox_pretty(
   XXX, XXX,        XXX,        XXX,        XXX,        XXX,        XXX,          XXX,    XXX,        XXX,        XXX,        XXX,        XXX, XXX,
   XXX, TBD,        TBD,        TBD,        UC(0x2264), UC(0x2265), ___,          ___,    TBD,        UC(0x011C), UC(0x0108), TBD,        TBD, XXX,
@@ -199,7 +199,7 @@ XXX, XXX,        XXX,        UC(0x21D0), UC(0x21D2),                            
  * |--------+------+------+------+------+------| TDB  |           |  ALT |------+------+------+------+------+--------|
  * |  MO(1) |   a  |   o  |   e  |  u   |   i  |------|           |------|  d   |  h   |  t   |   n  |   s  |  -     |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | SHIFT  |   ;  |  q   |  j   |   k  |   x  |  CTL |           |  WIN |   b  |   m  |   w  |  v   |  z   | OLS(2) |
+ * | SHIFT  |   ;  |  q   |  j   |   k  |   x  |  CTL |           |  WIN |   b  |   m  |   w  |  v   |  z   |  XXX   |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | TBD  |  TBD |  TDB | Left | Right|                                       |  Up  | Down |  TDB |  TDB |  TDB |
  *   `----------------------------------'                                       `----------------------------------'
@@ -216,7 +216,7 @@ XXX, XXX,        XXX,        UC(0x21D0), UC(0x21D2),                            
 KC_ESCAPE, KC_1,      KC_2,     KC_3,     KC_4,     KC_5,     LGUI(KC_L),          UC_NEXT,          KC_6,               KC_7,    KC_8,    KC_9, KC_0, TBD,
 KC_TAB,    KC_QUOTE,  KC_COMMA, KC_DOT,   KC_P,     KC_Y,     TBD,                 KC_LALT,          KC_F,               KC_G,    KC_C,    KC_R, KC_L, KC_SLASH,
 MO(1),     KC_A,      KC_O,     KC_E,     KC_U,     KC_I,                                            KC_D,               KC_H,    KC_T,    KC_N, KC_S, KC_MINUS,
-KC_LSFT,   KC_SCLN,   KC_Q,     KC_J,     KC_K,     KC_X,     KC_LCTL,             KC_LGUI,          KC_B,               KC_M,    KC_W,    KC_V, KC_Z, OSL(2),
+KC_LSFT,   KC_SCLN,   KC_Q,     KC_J,     KC_K,     KC_X,     KC_LCTL,             KC_LGUI,          KC_B,               KC_M,    KC_W,    KC_V, KC_Z, XXX,
 TBD,       TBD,       TBD,      KC_LEFT,  KC_RIGHT,                                                                      KC_UP,   KC_DOWN, TBD,  TBD,  TBD,
                                                     TBD,      TBD,                 LCTL(KC_A), TBD,
                                                               LCTL(KC_X),          LGUI(LSFT(KC_S)),
