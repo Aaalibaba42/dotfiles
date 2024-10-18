@@ -1,0 +1,126 @@
+inherits = "ayu_light"
+
+# placeholder with everything
+# key = {
+#     fg = "TODO",
+#     bg = "TODO",
+#     underline = {
+#         color = "TODO",
+#         style = "line curl dashed dotted double_line"
+#     },
+#     modifiers = [
+#         "bold",
+#         "dim",
+#         "italic",
+#         "underlined",
+#         "slow_blink",
+#         "rapid_blink",
+#         "reversed",
+#         "hidden",
+#         "crossed_out"
+#     ]
+# }
+
+"ui.background" = { bg = "background" }
+"ui.background.separator" = { bg = "background" }
+"ui.foreground" = { bg = "foreground" }
+
+"ui.cursor" = { bg = "darkPurple" }
+"ui.cursor.primary" = { bg = "darkPurple" }
+
+"ui.selection" = { bg = "darkPurple2" }
+"ui.selection.primary" = { bg = "darkPurple" }
+
+"ui.cursor.normal" = { bg = "darkPurple" }
+"ui.cursor.primary.normal" = { bg = "darkPurple2" }
+
+"ui.cursor.select" = { bg = "darkPurple" }
+"ui.cursor.primary.select" = { bg = "darkPurple2" }
+
+"ui.cursor.insert" = { fg = "background", bg = "green" }
+# I think this is never applied since my primary insert cursor is a bar and not a block
+"ui.cursor.primary.insert" = { fg = "TODO1", bg = "TODO1" }
+
+"ui.cursor.match" = { fg = "red", modifiers = [ "italic" ] }
+
+"ui.gutter" = { bg = "cursorLine" }
+"ui.gutter.selected" = { fg = "red" }
+
+"ui.highlight.frameline" = { fg = "TODO1", bg = "TODO1" }
+"ui.linenr" = { fg = "orange", bg = "cursorLine" }
+"ui.linenr.selected" = { fg = "red", bg = "cursorLine" }
+"ui.statusline" = { fg = "foreground", bg = "visualSelection" }
+"ui.statusline.inactive" = { fg = "TODO1", bg = "TODO1" }
+"ui.statusline.normal" = { fg = "foreground", bg = "purple2" }
+"ui.statusline.insert" = { fg = "background", bg = "yellow" }
+"ui.statusline.select" = { fg = "foreground", bg = "cyan" }
+# I don't use separators in my statusLine
+"ui.statusline.separator" = { fg = "TODO1", bg = "TODO1" }
+"ui.bufferline" = { fg = "foregroundDarkest", bg = "cursorLine" }
+"ui.bufferline.active" = { fg = "foreground", bg = "visualLine" }
+"ui.bufferline.background" = { fg = "foregroundDarkest", bg = "visualLine" }
+"ui.popup" = { fg = "foreground", bg = "cursorLine" }
+"ui.popup.info" = { fg = "yellow", bg = "cursorLine" }
+"ui.window" = { fg = "darkPurple2", bg = "darkPurple" }
+"ui.help" = { fg = "foreground", bg = "cursorLine" }
+"ui.text" = { fg = "foreground" }
+"ui.text.focus" = { fg = "foreground" }
+"ui.text.inactive" = { fg = "foregroundDarkest" }
+"ui.text.info" = { fg = "foreground", bg = "visualSelection" }
+"ui.virtual.ruler" = { fg = "red", bg = "visualSelection" }
+# "ui.virtual.whitespace" = { fg = "foreground", bg = "background" }
+"ui.virtual.indent-guide" = { fg = "foregroundDarkest" }
+"ui.virtual.inlay-hint" = { fg = "grey", bg = "visualSelection" }
+"ui.virtual.inlay-hint.parameter" = { fg = "grey", bg = "visualSelection" }
+"ui.virtual.inlay-hint.type" = { fg = "grey", bg = "visualSelection" }
+"ui.virtual.wrap" = { fg = "grey2" }
+"ui.virtual.jump-label" = { fg = "TODO", bg = "TODO"}
+
+"ui.menu" = { fg = "foregroundDarkest", bg = "background" }
+"ui.menu.selected" = { fg = "foreground", bg = "visualSelection" }
+"ui.menu.scroll" = { fg = "TODO", bg = "TODO" }
+"ui.highlight" = { fg = "TODO", bg = "TODO" }
+
+"ui.cursorline" = { fg = "foreground", bg = "cursorLine" }
+"ui.cursorline.secondary" = { fg = "foreground", bg = "cursorLine" }
+
+"warning" = { fg = "foreground", bg = "orange" }
+"error" = { fg = "foreground", bg = "red"}
+"info" = { fg = "background", bg = "cyan" }
+
+"diagnostic.warning" = { fg = "TODO", bg = "orange" }
+"diagnostic.error" = { fg = "TODO", bg = "red"}
+"diagnostic.info" = { fg = "TODO", bg = "cyan" }
+"diagnostic.unnecessary" = { fg = "TODO", bg = "yellow" }
+"diagnostic.deprecated" = { fg = "TODO", bg = "orange" }
+
+### SYNTAX TREESITTER ###
+# TODO
+
+[palette]
+red = "#e33400"
+orange = "#e39400"
+green = "#5ccc96"
+forestGreen = "#003b1b"
+yellow = "#f2ce00"
+purple = "#b3a1e6"
+purple2 = "#7a5ccc"
+darkPurple = "#30365f"
+darkPurple2 = "#686f9a"
+cyan = "#00a3cc"
+magenta = "#ce6f8f"
+
+background = "#0f111b"
+foreground = "#ecf0c1"
+foregroundDarkest = "#7d7f66"
+visualSelection = "#1b1c36"
+cursorLine = "#16172d"
+
+grey = "#818596"
+grey2 = "#c1c3cc"
+pureWhite = "#ffffff"
+pureBlack = "#000000"
+
+# Bright green color to debug stuff that don't show up or are yet to show up
+TODO = "#00ff00"
+TODO1 = "#00ffff"

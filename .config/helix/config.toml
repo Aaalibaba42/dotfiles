@@ -1,0 +1,197 @@
+theme = "myspaceduck"
+
+[editor]
+# buffer lines above and under when scrolling
+scrolloff = 5
+# self explanatory
+mouse = false
+# self explanatory
+middle-click-paste = true
+# how many lines per scroll
+scroll-lines = 1
+# which shell when external command
+shell = [ "bash", "-c" ]
+# line number mode (absolute, relative)
+line-number = "relative"
+# highlight of cursor line
+cursorline = true
+# highlight of cursor column
+cursorcolumn = false
+# what info on the left thing
+gutters = [ "line-numbers", "spacer", "diagnostics" ]
+# self explanatory
+auto-completion = true
+# self explanatory
+auto-format = true
+# ms before idle timer starts
+idle-timeout = 250
+# ms after typing before completions are shown (5 for instant)
+completion-timeout = 5
+# apply completion item instantly when selected
+preview-completion-insert = true
+# length of word before trying to autocomplete
+completion-trigger-len = 1
+# replace the whole word and not before the cursor for completions
+completion-replace = true
+# info boxes
+auto-info = true
+# override automatic detection of terminal truecolor support (?)
+true-color = false
+# same as true-color with undercurl (?)
+undercurl = false
+# vertical lines to indicate stuff
+rulers = [ 72, 80 ]
+# top section with opened buffers, "always", "never", "multiple" (only when more than 1 buffer opened
+bufferline = "multiple"
+# changes the color depending on the mode (like normal, selection, insert etc)
+color-modes = true
+# "Maximum line length. Used for the :reflow command and soft-wrapping if soft-wrap.wrap-at-text-width is set"
+text-width = 79
+# IDK what this does, something like lsp relative to project or something
+workspace-lsp-roots = []
+# which line ending encoding to use, "native", "lf", "crlf", "ff", "cr", "nel"
+default-line-ending = "native"
+# self explanatory
+insert-final-newline = true
+# how much border on popup stuff, "popup", "menu", "all", "none"
+popup-border = "all"
+# how to figure out indentation hybrid tries all: "hybrid" -> "tree-sitter" -> "simple"
+indent-heuristic = "hybrid"
+# When I know what jump labels are I'll come back here hopefully
+jump-label-alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+[editor.statusline]
+# With left center and right you can tell what to write in the differente sections of the status line. Available keys are:
+# mode: The current editor mode
+# spinner: LSP activity indicator
+# file-name: path/name of opened file
+# file-absolute-path: absolute path/name the opened file
+# file-base-name: basename of opened file
+# file-modification-indicator: The indicator to show whether the file is modified (a [+] appears when there are unsaved changes)
+# file-encoding: The encoding of the opened file if it differs from UTF-8
+# file-line-ending: The file line endings encoding
+# read-only-indicator: An indicator that shows [readonly] when a file cannot be written
+# total-line-numbers: The total line numbers of the opened file
+# file-type: The type of the opened file
+# diagnostics: The number of warnings and/or errors
+# workspace-diagnostics: The number of warnings and/or errors on workspace
+# selections: The number of active selections
+# primary-selection-length: The number of characters currently in primary selection
+# position: The cursor position
+# position-percentage: The cursor position as a percentage of the total number of lines
+# separator: The string defined in editor.statusline.separator
+# spacer: Inserts a space between elements (multiple/contiguous spacers may be specified)
+# version-control: The current branch name or detached commit hash of the opened workspace
+# register: The current selected register
+
+left = [ "mode", "workspace-diagnostics" ]
+center = [ "file-name", "file-type" ]
+right = [ "spinner", "read-only-indicator", "position" ]
+separator = "|"
+mode.normal = "Normal"
+mode.insert = "Insert"
+mode.select = "Selection"
+
+[editor.lsp]
+# self explanatory
+enable = true
+# when lsp talks to me it gets displayed
+display-messages = true
+# help with function argument signature
+auto-signature-help = true
+# display inlay hints like: foo(`argument_name1: `3, `argument_name2: `4)
+display-inlay-hints = true
+# self explanatory
+display-signature-help-docs = true
+# enable snippets completion (not 100% sure what they are)
+snippets = true
+# in the "goto reference popup" (not sure what it is), include the declaration of the function
+goto-reference-include-declaration = true
+
+[editor.cursor-shape]
+# for each "normal" "insert" "select", choose "block", "bar", "underline", "hidden"
+normal = "block"
+insert = "bar"
+select = "block"
+
+[editor.file-picker]
+# basicly some of the things to ignore for the file picker, pretty much self explanatory
+hidden = false
+follow-symlinks = false
+deduplicate-links = false
+parents = false
+ignore = false
+git-ignore = false
+git-global = false
+git-exclude = false
+# unset for no limit
+# max-depth
+
+[editor.auto-save]
+# when changing window
+focus-lost = true
+# timeout
+after-delay.enable = true
+# every 5min
+after-delay.timeout = 300_000
+
+[editor.search]
+# case-insensitive except if the pattern contains uppercase
+smart-case = true
+# last + 1 -> begin
+wrap-around = false
+
+# whether to render characters and their rendering
+[editor.whitespace.render]
+space = "none"
+tab = "none"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-level = 3
+
+[editor.soft-wrap]
+enable = true
+# free space at the end to not cut mid-word
+max-wrap = 20
+# how much indentation kept when wrapping
+max-indent-retain = 24
+# char of wrap indicator char
+wrap-indicator = "→ "
+# wrap at textsize and not viewport
+wrap-at-text-width = false
+
+# I'm not sure what this does but I don't want it
+[editor.smart-tab]
+enable = false
+
+[keys.normal]
+esc = [ "collapse_selection", "keep_primary_selection", "normal_mode" ]
+S-v = [ "extend_line_below", "select_mode" ]
+S-x = "extend_line_above"
+S-g = "goto_file_end"
+h = "move_char_left"
+s = "move_char_right"
+t = "move_visual_line_up"
+n = "move_visual_line_down"
+
+[keys.select]
+esc = [ "collapse_selection", "keep_primary_selection", "normal_mode" ]
+h = "extend_char_left"
+s = "extend_char_right"
+t = "extend_visual_line_up"
+n = "extend_visual_line_down"
+
+[keys.insert]
+esc = [ "collapse_selection", "keep_primary_selection", "normal_mode" ]
