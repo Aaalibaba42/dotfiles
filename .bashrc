@@ -151,3 +151,4 @@ function tmp()
 {
     echo "Not set"
 }
+. "$HOME/.cargo/env"
