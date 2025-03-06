@@ -2,11 +2,13 @@ theme = "myspaceduck"
 
 [editor]
 # buffer lines above and under when scrolling
-scrolloff = 5
+scrolloff = 2
 # self explanatory
 mouse = false
 # self explanatory
 middle-click-paste = true
+# default register for yanking/pasting
+default-yank-register = '"'
 # how many lines per scroll
 scroll-lines = 1
 # which shell when external command
@@ -17,10 +19,14 @@ line-number = "relative"
 cursorline = true
 # highlight of cursor column
 cursorcolumn = false
+# In comment new line continues comment
+continue-comments = true
 # what info on the left thing
 gutters = [ "line-numbers", "spacer", "diagnostics" ]
 # self explanatory
 auto-completion = true
+# self explanatory
+path-completion = true
 # self explanatory
 auto-format = true
 # ms before idle timer starts
@@ -30,9 +36,9 @@ completion-timeout = 5
 # apply completion item instantly when selected
 preview-completion-insert = true
 # length of word before trying to autocomplete
-completion-trigger-len = 1
+completion-trigger-len = 2
 # replace the whole word and not before the cursor for completions
-completion-replace = true
+completion-replace = false
 # info boxes
 auto-info = true
 # override automatic detection of terminal truecolor support (?)
@@ -40,15 +46,15 @@ true-color = false
 # same as true-color with undercurl (?)
 undercurl = false
 # vertical lines to indicate stuff
-rulers = [ 72, 80 ]
+rulers = [ 73, 81 ]
 # top section with opened buffers, "always", "never", "multiple" (only when more than 1 buffer opened
 bufferline = "multiple"
 # changes the color depending on the mode (like normal, selection, insert etc)
 color-modes = true
 # "Maximum line length. Used for the :reflow command and soft-wrapping if soft-wrap.wrap-at-text-width is set"
-text-width = 79
+text-width = 80
 # IDK what this does, something like lsp relative to project or something
-workspace-lsp-roots = []
+workspace-lsp-roots = [ '.git' ]
 # which line ending encoding to use, "native", "lf", "crlf", "ff", "cr", "nel"
 default-line-ending = "native"
 # self explanatory
@@ -57,6 +63,8 @@ insert-final-newline = true
 popup-border = "all"
 # how to figure out indentation hybrid tries all: "hybrid" -> "tree-sitter" -> "simple"
 indent-heuristic = "hybrid"
+# diagnostics at the end of a line (default is disable, not sure the unit/type of the config)
+end-of-line-diagnostics = "hint"
 # When I know what jump labels are I'll come back here hopefully
 jump-label-alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -105,8 +113,8 @@ display-inlay-hints = true
 display-signature-help-docs = true
 # enable snippets completion (not 100% sure what they are)
 snippets = true
-# in the "goto reference popup" (not sure what it is), include the declaration of the function
-goto-reference-include-declaration = true
+# in the "goto reference popup", include the declaration of the function
+goto-reference-include-declaration = false # <gd> to go to def, redundant otherwise
 
 [editor.cursor-shape]
 # for each "normal" "insert" "select", choose "block", "bar", "underline", "hidden"
@@ -117,13 +125,13 @@ select = "block"
 [editor.file-picker]
 # basicly some of the things to ignore for the file picker, pretty much self explanatory
 hidden = false
-follow-symlinks = false
-deduplicate-links = false
-parents = false
-ignore = false
-git-ignore = false
-git-global = false
-git-exclude = false
+follow-symlinks = true
+deduplicate-links = true
+parents = true
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
 # unset for no limit
 # max-depth
 
@@ -139,7 +147,7 @@ after-delay.timeout = 300_000
 # case-insensitive except if the pattern contains uppercase
 smart-case = true
 # last + 1 -> begin
-wrap-around = false
+wrap-around = true
 
 # whether to render characters and their rendering
 [editor.whitespace.render]

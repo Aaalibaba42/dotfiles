@@ -114,17 +114,17 @@
 	"memory": {
 		"interval": 1,
 		"format": "󰊚 {}%",
-        "on-scroll-up": "~/hsh/scripts/bin/memory_controller up",
-        "on-scroll-down": "~/hsh/scripts/bin/memory_controller down",
-        "on-click": "killall memory_controller; rm /tmp/memory_controller.*; ~/hsh/scripts/bin/memory_controller",
+        "on-scroll-up": "memory_controller up",
+        "on-scroll-down": "memory_controller down",
+        "on-click": "killall memory_controller; rm /tmp/memory_controller.*; memory_controller",
         "on-click-right": "$TERMINAL -e htop --sort-key PERCENT_MEM"
 	},
 	"cpu": {
 		"interval": 1,
 		"format": " {usage}%",
-        "on-scroll-up": "~/hsh/scripts/bin/cpu_controller up",
-        "on-scroll-down": "~/hsh/scripts/bin/cpu_controller down",
-        "on-click": "killall cpu_controller; rm /tmp/cpu_controller.*; ~/hsh/scripts/bin/cpu_controller",
+        "on-scroll-up": "cpu_controller up",
+        "on-scroll-down": "cpu_controller down",
+        "on-click": "killall cpu_controller; rm /tmp/cpu_controller.*; cpu_controller",
         "on-click-right": "$TERMINAL -e htop --sort-key PERCENT_CPU"
 	},
 
