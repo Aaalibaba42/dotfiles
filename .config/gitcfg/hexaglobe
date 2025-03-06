@@ -1,0 +1,7 @@
+[user]
+	email = jwiriath@hexaglobe.com
+	name = jwiriath
+	signingkey = <gpg key>
+
+[commit]
+	gpgSign = true
