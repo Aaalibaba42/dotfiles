@@ -1,4 +1,3 @@
-base-devel
 beautyline
 bind
 brightnessctl
@@ -27,3 +26,21 @@ wl-clipboard
 grimblast
 hyprpicker
 doas
+ncdu
+nwg-look
+which
+fakeroot
+debugedit
+gcc
+make
+pkgconf
+autoconf
+automake
+flex
+bison
+guile
+m4
+make
+patch
+pkgconf
+texinfo
