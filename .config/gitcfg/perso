@@ -1,3 +1,7 @@
 [user]
 	email = jules@wiriath.com
 	name = Jules Wiriath
+	signingkey = 1EE8C0C510797AB3A1BE7126C2AEA5BEF01346C2
+
+[commit]
+	gpgSign = true
