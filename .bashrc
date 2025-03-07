@@ -76,7 +76,7 @@ alias cm='cmake -S . -B build && cmake --build build --parallel'
 
 # general purpose
 alias du='du -h'
-alias please='sudo !!'
+alias please='doas !!'
 alias reboot='shutdown -r now'
 alias shutdown='shutdown now'
 alias mkdir='mkdir -pv'
@@ -106,10 +106,10 @@ alias tmpws='cd $(mktemp -d)'
 alias grep='grep --color=always -n'
 
 # Pacman
-alias spacman='sudo pacman'
-alias spacmans='sudo pacman -S --noconfirm'
-alias pacsyu='sudo pacman -Syy --noconfirm archlinux-keyring; paru -Syu --noconfirm'
-alias spacmanr='sudo pacman -Rsn'
+alias spacman='doas pacman'
+alias spacmans='doas pacman -S --noconfirm'
+alias pacsyu='doas pacman -Syy --noconfirm archlinux-keyring; paru -Syu --noconfirm'
+alias spacmanr='doas pacman -Rsn'
 alias pacsearch='pacman -Ss'
 alias parsearch='paru -Ss'
 

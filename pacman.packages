@@ -15,9 +15,15 @@ noto-fonts-emoji
 pamixer
 pavucontrol
 qt5
-rofi
+rofi-wayland
 rustup
 tig
 tree
 uwufetch
 vesktop
+
+jq
+wl-clipboard
+grimblast
+hyprpicker
+doas

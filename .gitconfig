@@ -2,6 +2,16 @@
 	name = Jules Wiriath
 	email = jules@wiriath.com
 
+[core]
+	editor = helix
+
+[color]
+	ui = always
+	branch = always
+	diff = always
+	interactive = always
+	status = always
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
