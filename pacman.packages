@@ -20,7 +20,6 @@ tig
 tree
 uwufetch
 vesktop
-
 jq
 wl-clipboard
 grimblast
@@ -44,3 +43,10 @@ make
 patch
 pkgconf
 texinfo
+bash-language-server
+shellcheck
+man
+man-db
+shfmt
+yt-dlp
+bat
