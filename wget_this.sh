@@ -137,7 +137,9 @@ gpg_perso_key=$(gpg --list-key "Jules Wiriath <jules@wiriath.com>" | head -n 2 |
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_pro_key/g" "$config/gitcfg/hexaglobe"
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_perso_key/g" "$config/gitcfg/perso"
 
-cleanup
+# TODO decrypt perso.tar.enc smhtng file in /home/$user/hsh/perso
+
+safe_cleanup
 
 echo "Some of the things we did require full system resync and upgrade."
 doas pacman -Syyu

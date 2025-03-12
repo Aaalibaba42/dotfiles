@@ -2,6 +2,9 @@
 	name = Jules Wiriath
 	email = jules@wiriath.com
 
+[advice]
+	detachedHead = false
+
 [core]
 	editor = helix
 
