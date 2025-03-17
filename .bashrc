@@ -76,7 +76,6 @@ alias cm='cmake -S . -B build && cmake --build build --parallel'
 
 # general purpose
 alias du='du -h'
-alias please='doas !!'
 alias reboot='shutdown -r now'
 alias shutdown='shutdown now'
 alias mkdir='mkdir -pv'

@@ -59,7 +59,6 @@ Language: Cpp
 NamespaceIndentation: All
 PointerAlignment: Left
 QualifierAlignment: Right
-# QualifierOrder: ['type', 'const', 'volatile', 'restrict']
 ReferenceAlignment: Left
 ReflowComments: true
 SortIncludes: false
