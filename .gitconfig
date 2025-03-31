@@ -21,11 +21,17 @@
 	required = true
 	clean = git-lfs clean -- %f
 
+[push]
+	autoSetupRemote = true
+
 [pull]
 	rebase = true
 
 [init]
 	defaultBranch = main
+
+[rerere]
+	enabled = true
 
 [includeIf "gitdir:~/hsh/workspace/hexa/"]
 	path = "~/.config/gitcfg/hexaglobe"
