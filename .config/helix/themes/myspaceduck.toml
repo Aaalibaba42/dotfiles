@@ -12,7 +12,6 @@ inherits = "ayu_light"
 #         "bold",
 #         "dim",
 #         "italic",
-#         "underlined",
 #         "slow_blink",
 #         "rapid_blink",
 #         "reversed",
@@ -21,78 +20,159 @@ inherits = "ayu_light"
 #     ]
 # }
 
+# Background of the window
 "ui.background" = { bg = "background" }
-"ui.background.separator" = { bg = "background" }
-"ui.foreground" = { bg = "foreground" }
+# Separator in Space+f
+"ui.background.separator" = { }
 
-"ui.cursor" = { bg = "darkPurple" }
-"ui.cursor.primary" = { bg = "darkPurple" }
+# Since every other cursor is set, I think this has no impact
+"ui.cursor" = { fg = "TODO_GREEN", bg = "TODO_PURPLE" }
 
-"ui.selection" = { bg = "darkPurple2" }
-"ui.selection.primary" = { bg = "darkPurple" }
-
-"ui.cursor.normal" = { bg = "darkPurple" }
-"ui.cursor.primary.normal" = { bg = "darkPurple2" }
-
+# With multiple cursors, the colour of non primary cursors
+"ui.cursor.normal" = {  bg = "darkPurple2" }
 "ui.cursor.select" = { bg = "darkPurple" }
+"ui.cursor.insert" = { fg = "background", bg = "green" }
+
+# A matching pair (like '[' with ']', or '"' with '"'), how to display
+# the corresponding pair to the one under the cursor
+"ui.cursor.match" = { modifiers = [ "bold" ], underline = { color = "purple2", style = "double_line" } }
+
+# Since every other cursor is set, I think this has no impact
+"ui.cursor.primary" = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+
+# The colour of primary cursors
+"ui.cursor.primary.normal" = { modifiers = [ "reversed" ] }
+# Since insert cursor is a bar, I don't think this matters
+# "ui.cursor.primary.insert" = { fg = "TODO_GREEN", bg = "TODO_PURPLE" }
 "ui.cursor.primary.select" = { bg = "darkPurple2" }
 
-"ui.cursor.insert" = { fg = "background", bg = "green" }
-# I think this is never applied since my primary insert cursor is a bar and not a block
-"ui.cursor.primary.insert" = { fg = "TODO1", bg = "TODO1" }
+# TODO use debug mode to figure out what you want for this
+"ui.debug.breakpoint" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
+"ui.debug.active" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
 
-"ui.cursor.match" = { fg = "red", modifiers = [ "italic" ] }
-
+# "gutter" is the thing on the left where number, diagnostics etc live
+# Colour of the gutter where the cursor (or secondary cursors) is not
 "ui.gutter" = { bg = "cursorLine" }
-"ui.gutter.selected" = { fg = "red" }
+# Colour of the gutter where the cursor (or secondary) is
+"ui.gutter.selected" = { fg = "red", bg = "background" }
 
-"ui.highlight.frameline" = { fg = "TODO1", bg = "TODO1" }
-"ui.linenr" = { fg = "orange", bg = "cursorLine" }
-"ui.linenr.selected" = { fg = "red", bg = "cursorLine" }
+# Line number in the gutter not where cursor (or secondary cursors) is
+"ui.linenr" = { fg = "yellow", bg = "cursorLine" }
+# Line number in the gutter where cursor (or secondary cursors) is
+"ui.linenr.selected" = { fg = "red", bg = "background" }
+
+# Thing down there
 "ui.statusline" = { fg = "foreground", bg = "visualSelection" }
-"ui.statusline.inactive" = { fg = "TODO1", bg = "TODO1" }
+# If another window (Space+w things), how to display the inactive ones
+"ui.statusline.inactive" = { fg = "foregroundDarkest", bg = "background" }
+# Nor|Ins|Sel indicator colours
 "ui.statusline.normal" = { fg = "foreground", bg = "purple2" }
 "ui.statusline.insert" = { fg = "background", bg = "yellow" }
 "ui.statusline.select" = { fg = "foreground", bg = "cyan" }
-# I don't use separators in my statusLine
-"ui.statusline.separator" = { fg = "TODO1", bg = "TODO1" }
-"ui.bufferline" = { fg = "foregroundDarkest", bg = "cursorLine" }
-"ui.bufferline.active" = { fg = "foreground", bg = "visualLine" }
-"ui.bufferline.background" = { fg = "foregroundDarkest", bg = "visualLine" }
+# I don't have separators in the status line"
+"ui.statusline.separator" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
+
+# Thing at the top, only active if multiple buffers are opened
+"ui.bufferline" = { fg = "foregroundDarkest", bg = "visualSelection" }
+"ui.bufferline.active" = { fg = "foreground", bg = "background" }
+"ui.bufferline.background" = { fg = "foregroundDarkest", bg = "visualSelection" }
+
+# Menus box like Space 
 "ui.popup" = { fg = "foreground", bg = "cursorLine" }
-"ui.popup.info" = { fg = "yellow", bg = "cursorLine" }
-"ui.window" = { fg = "darkPurple2", bg = "darkPurple" }
-"ui.help" = { fg = "foreground", bg = "cursorLine" }
-"ui.text" = { fg = "foreground" }
-"ui.text.focus" = { fg = "foreground" }
+# The border around these
+"ui.popup.info" = { fg = "yellow", bg = "visualSelection" }
+
+# TODO find out what that is
+ui.picker.header = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+# FIXME does not seem to work at all
+# ui.picker.header.column = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+# ui.picker.header.column.active = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+
+# Separator when multiple windows (vsplit)
+"ui.window" = { fg = "purple2", bg = "darkPurple" }
+# When writing a command in the command mode, the box explaining the
+# command
+"ui.help" = { fg = "darkPurple2", bg = "cursorLine" }
+
+# Text of the ui, like the LSP messages, stuff like that
+# "ui.text" = { fg = "foreground" }
+# Current line in file picker (and probably other kinds of pickers)
+"ui.text.focus" = { fg = "foreground", bg = "visualSelection" }
+# For past searches and things like that
 "ui.text.inactive" = { fg = "foregroundDarkest" }
-"ui.text.info" = { fg = "foreground", bg = "visualSelection" }
-"ui.virtual.ruler" = { fg = "red", bg = "visualSelection" }
-# "ui.virtual.whitespace" = { fg = "foreground", bg = "background" }
+# Text colour for the ui.popup.info
+"ui.text.info" = { fg = "foreground" }
+# TODO
+# "Directory names in prompt completion" tried `:o path/to/file` and the
+# directories weren't coloured, same for code completion `path/to/file`
+ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
+
+# Vertical lines at some configured columns (73&81 here to stay under
+# 72 or 80 chars)
+"ui.virtual.ruler" = { bg = "visualSelection" }
+
+# give special colours to whitespaces, who would want that
+"ui.virtual.whitespace" = { }
+# indent guides like what's left of this:
+  # 1 indent guides
+    # 2 indent guide
+  # 1 indent guides
 "ui.virtual.indent-guide" = { fg = "foregroundDarkest" }
-"ui.virtual.inlay-hint" = { fg = "grey", bg = "visualSelection" }
-"ui.virtual.inlay-hint.parameter" = { fg = "grey", bg = "visualSelection" }
-"ui.virtual.inlay-hint.type" = { fg = "grey", bg = "visualSelection" }
-"ui.virtual.wrap" = { fg = "grey2" }
-"ui.virtual.jump-label" = { fg = "TODO", bg = "TODO"}
 
+# LSP help
+"ui.virtual.inlay-hint" = { fg = "foregroundDarkest", bg = "visualSelection" }
+"ui.virtual.inlay-hint.parameter" = { fg = "foregroundDarkest", bg = "visualSelection" }
+"ui.virtual.inlay-hint.type" = { fg = "foregroundDarkest", bg = "visualSelection" }
+
+# Wrap arrow indicator
+"ui.virtual.wrap" = { fg = "foregroundDarkest" }
+# g+w jump labels (like vimium extension o+l thing)
+"ui.virtual.jump-label" = { fg = "yellow", bg = "darkPurple"}
+
+# Code and command completion menu, could be :, can be completion and
+# apparently loads of other stuff
 "ui.menu" = { fg = "foregroundDarkest", bg = "background" }
+# Selected item in those menu
 "ui.menu.selected" = { fg = "foreground", bg = "visualSelection" }
-"ui.menu.scroll" = { fg = "TODO", bg = "TODO" }
-"ui.highlight" = { fg = "TODO", bg = "TODO" }
+# When many items, scrollbar thing (fg is only the thing, not the
+# scroll*bar*, bg appears useless)
+"ui.menu.scroll" = { fg = "darkPurple" }
 
-"ui.cursorline" = { fg = "foreground", bg = "cursorLine" }
-"ui.cursorline.secondary" = { fg = "foreground", bg = "cursorLine" }
+# Selection buffer colour, primary and secondary
+"ui.selection" = { bg = "darkPurple" }
+"ui.selection.primary" = { bg = "darkPurple" }
 
-"warning" = { fg = "foreground", bg = "orange" }
-"error" = { fg = "foreground", bg = "red"}
-"info" = { fg = "background", bg = "cyan" }
+# When a search opens a picker (like g+r), line of what matched
+# highlighted
+"ui.highlight" = { bg = "darkPurple" }
+# TODO Debug mode canondrum
+"ui.highlight.frameline" = { fg = "TODO_PURPLE", bg = "TODO_RED" }
 
-"diagnostic.warning" = { fg = "TODO", bg = "orange" }
-"diagnostic.error" = { fg = "TODO", bg = "red"}
-"diagnostic.info" = { fg = "TODO", bg = "cyan" }
-"diagnostic.unnecessary" = { fg = "TODO", bg = "yellow" }
-"diagnostic.deprecated" = { fg = "TODO", bg = "orange" }
+# self explanatory
+"ui.cursorline.primary" = { bg = "cursorLine" }
+"ui.cursorline.secondary" = { }
+
+# self explanatory
+"ui.cursorcolumn.primary" = { }
+"ui.cursorcolumn.secondary" = { }
+
+# indicators
+"warning" = { fg = "orange" }
+"error" = { fg = "red" }
+"info" = { fg = "cyan" }
+"hint" = { fg = "yellow" }
+
+# Since every type of diagnostic is overridden, it should be okay
+"diagnostic" = { fg = "TODO_PURPLE", bg = "TODO_YELLOW" }
+"diagnostic.info" = { underline = { color = "cyan" , style = "curl" }, modifiers = ["italic" ] }
+"diagnostic.deprecated" = { underline = { color = "purple" , style = "curl" }, modifiers = ["italic" ] }
+"diagnostic.unnecessary" = { underline = { color = "yellow" , style = "curl" }, modifiers = ["italic" ] }
+"diagnostic.warning" = { underline = { color = "orange" , style = "curl" }, modifiers = ["italic" ] }
+"diagnostic.error" = { underline = { color = "red" , style = "curl" }, modifiers = ["italic" ] }
+
+# TODO idk what this is "Snippet placeholder"
+tabstop = { fg = "TODO_RED", bg = "TODO_YELLOW" }
+
 
 ### SYNTAX TREESITTER ###
 # TODO
@@ -121,6 +201,11 @@ grey2 = "#c1c3cc"
 pureWhite = "#ffffff"
 pureBlack = "#000000"
 
-# Bright green color to debug stuff that don't show up or are yet to show up
-TODO = "#00ff00"
-TODO1 = "#00ffff"
+# Bright colours to debug stuff that don't show up or are yet to show up
+# anywhere
+TODO_RED = "#ff0000"
+TODO_GREEN = "#00ff00"
+TODO_BLUE = "#0000ff"
+TODO_CYAN = "#00ffff"
+TODO_PURPLE = "#ff00ff"
+TODO_YELLOW = "#ffff00"
