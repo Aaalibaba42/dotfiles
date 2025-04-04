@@ -1,5 +1,3 @@
-inherits = "ayu_light"
-
 # placeholder with everything
 # key = {
 #     fg = "TODO",
@@ -20,10 +18,12 @@ inherits = "ayu_light"
 #     ]
 # }
 
+### ----- HELIX UI ----- ###
+
 # Background of the window
 "ui.background" = { bg = "background" }
 # Separator in Space+f
-"ui.background.separator" = { }
+"ui.background.separator" = {}
 
 # Since every other cursor is set, I think this has no impact
 "ui.cursor" = { fg = "TODO_GREEN", bg = "TODO_PURPLE" }
@@ -35,7 +35,7 @@ inherits = "ayu_light"
 
 # A matching pair (like '[' with ']', or '"' with '"'), how to display
 # the corresponding pair to the one under the cursor
-"ui.cursor.match" = { modifiers = [ "bold" ], underline = { color = "purple2", style = "double_line" } }
+"ui.cursor.match" = { modifiers = [ "bold", "italic" ], underline = { color = "purple2", style = "double_line" } }
 
 # Since every other cursor is set, I think this has no impact
 "ui.cursor.primary" = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
@@ -82,8 +82,8 @@ inherits = "ayu_light"
 # The border around these
 "ui.popup.info" = { fg = "yellow", bg = "visualSelection" }
 
-# TODO find out what that is
-ui.picker.header = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+# TODO find out what that is < log says ui.picker not found
+# ui.picker.header = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
 # FIXME does not seem to work at all
 # ui.picker.header.column = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
 # ui.picker.header.column.active = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
@@ -95,17 +95,18 @@ ui.picker.header = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
 "ui.help" = { fg = "darkPurple2", bg = "cursorLine" }
 
 # Text of the ui, like the LSP messages, stuff like that
-# "ui.text" = { fg = "foreground" }
+"ui.text" = { fg = "foreground" }
 # Current line in file picker (and probably other kinds of pickers)
 "ui.text.focus" = { fg = "foreground", bg = "visualSelection" }
 # For past searches and things like that
 "ui.text.inactive" = { fg = "foregroundDarkest" }
 # Text colour for the ui.popup.info
 "ui.text.info" = { fg = "foreground" }
-# TODO
+
+# FIXME helix says not found
 # "Directory names in prompt completion" tried `:o path/to/file` and the
 # directories weren't coloured, same for code completion `path/to/file`
-ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
+# ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
 
 # Vertical lines at some configured columns (73&81 here to stay under
 # 72 or 80 chars)
@@ -139,8 +140,8 @@ ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
 "ui.menu.scroll" = { fg = "darkPurple" }
 
 # Selection buffer colour, primary and secondary
-"ui.selection" = { bg = "darkPurple" }
-"ui.selection.primary" = { bg = "darkPurple" }
+"ui.selection" = { bg = "visualSelection" }
+"ui.selection.primary" = { bg = "darkPurple2" }
 
 # When a search opens a picker (like g+r), line of what matched
 # highlighted
@@ -157,13 +158,13 @@ ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
 "ui.cursorcolumn.secondary" = { }
 
 # indicators
-"warning" = { fg = "orange" }
-"error" = { fg = "red" }
-"info" = { fg = "cyan" }
-"hint" = { fg = "yellow" }
+"warning" = { fg = "background", bg = "orange", modifiers = [ "bold", "italic" ] }
+"error" = { fg = "background", bg = "red", modifiers = [ "bold", "italic" ] }
+"info" = { fg = "background", bg = "cyan", modifiers = [ "bold", "italic" ] }
+"hint" = { fg = "background", bg = "yellow", modifiers = [ "bold", "italic" ] }
 
 # Since every type of diagnostic is overridden, it should be okay
-"diagnostic" = { fg = "TODO_PURPLE", bg = "TODO_YELLOW" }
+"diagnostic" = { modifiers = ["italic"], underline = { style = "curl" } }
 "diagnostic.info" = { underline = { color = "cyan" , style = "curl" }, modifiers = ["italic" ] }
 "diagnostic.deprecated" = { underline = { color = "purple" , style = "curl" }, modifiers = ["italic" ] }
 "diagnostic.unnecessary" = { underline = { color = "yellow" , style = "curl" }, modifiers = ["italic" ] }
@@ -171,11 +172,137 @@ ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
 "diagnostic.error" = { underline = { color = "red" , style = "curl" }, modifiers = ["italic" ] }
 
 # TODO idk what this is "Snippet placeholder"
-tabstop = { fg = "TODO_RED", bg = "TODO_YELLOW" }
+"tabstop" = { fg = "TODO_RED", bg = "TODO_YELLOW" }
 
 
-### SYNTAX TREESITTER ###
-# TODO
+### ----- SYNTAX TREESITTER ----- ###
+
+# TODO Figure out
+"attributes" = { bg = "TODO_PURPLE" }
+
+"type" = { fg = "green" }
+  "type.builtin" = { fg = "primitives" }
+  "type.parameter" = { bg = "TODO_BLUE" }
+  # enums and variant are control structures / language features in my mind
+  "type.enum" = { fg = "directValues" }
+    "type.enum.variant" = { fg = "directValues" }
+
+# TODO maybe a special colour or modifier for constructor could be useful
+"constructor" = { fg = "callable" }
+
+"constant" = { fg = "directValues" }
+  "constant.builtin" = { fg = "primitives" }
+    "constant.builtin.boolean" = { fg = "directValues" }
+  "constant.character" = { fg = "directValues" }
+    "constant.character.escape" = { modifiers = [ "bold", "italic" ]}
+  "constant.numeric" = { fg = "directValues" }
+    "constant.numeric.integer" = { fg = "directValues" }
+    "constant.numeric.float" = { fg = "directValues" }
+
+"string" = { fg = "directValues" }
+  "string.regexp" = { fg = "directValues"}
+  "string.special" = { fg = "directValues" }
+    "string.special.path" = { fg = "directValues" }
+    "string.special.url" = { fg = "directValues" }
+    "string.special.symbol" = { fg = "directValues" }
+
+"comment" = { fg = "grey2" }
+  # "comment.line" = {}
+  # "comment.block" = {}
+  #   "comment.documentation" = {}
+
+"variable" = { fg = "foreground" }
+  "variable.builtin" = { fg = "primitives" }
+  "variable.parameter" = { fg = "foreground" }
+  "variable.other" = { bg = "TODO_RED"}
+    "variable.other.member" = { fg = "foreground"}
+      "variable.other.member.private" = { bg = "TODO_PURPLE" }
+
+"label" = { bg = "purple2" }
+
+"punctuation" = { fg = "purple" }
+  "punctuation.delimiter" = { fg = "purple2" }
+  "punctuation.bracket" = { fg = "purple2" }
+  # Like tabs and stuff
+  # "punctuation.special" = {}
+
+"keyword" = { fg = "orange" }
+  "keyword.control" = { fg = "orange" }
+    # "keyword.control.conditional" = { fg = "cyan" }
+    # "keyword.control.repeat" = { fg = "cyan" }
+    # "keyword.control.import" = { fg = "cyan" }
+    # "keyword.control.return" = { fg = "cyan" }
+    # "keyword.control.exception" = { fg = "cyan" }
+  "keyword.operator" = { fg = "callable" }
+  "keyword.directive" = { fg = "primitives" }
+
+"function" = { fg = "callable" }
+  "function.builtin" = { fg = "primitives" }
+  "function.method" = { fg = "callable" }
+    "function.method.private" = { fg = "callable" }
+  "function.macro" = { fg = "callable" }
+  "function.special" = { fg = "callable" }
+
+"storage" = { fg = "purple2" }
+  "storage.type" = { fg = "purple2" }
+  "storage.modifier" = { fg = "purple2"}
+
+"tag" = { fg = "purple" }
+  "tag.builtin" = { fg = "primitives" }
+
+"namespace" = { fg = "purple"}
+
+# Found this is Rust's "derive"... Ig I'll make them primitives
+"special" = { fg = "primitives", modifiers = [ "italic" ] }
+
+# "markup" = {}
+  "markup.heading" = { fg = "purple2" }
+    "markup.heading.marker" = { fg = "purple" }
+  #   "markup.heading.1" = {}
+  #   "markup.heading.2" = {}
+  #   "markup.heading.3" = {}
+  #   "markup.heading.4" = {}
+  #   "markup.heading.5" = {}
+  #   "markup.heading.6" = {}
+  # "markup.list" = {}
+  #   "markup.list.unnumbered" = {}
+  #   "markup.list.numbered" = {}
+  #   "markup.list.checked" = {}
+  #   "markup.list.unchecked" = {}
+  # "markup.bold" = {}
+  # "markup.italic" = {}
+  # "markup.strikethrough" = {}
+  # "markup.link" = {}
+  #   "markup.link.url" = {}
+  #   "markup.link.label" = {}
+  #   "markup.link.text" = {}
+  # "markup.quote" = {}
+  # "markup.raw" = {}
+  #   "markup.raw.inline" = {}
+  #   "markup.raw.block" = {}
+
+# "diff" = {}
+  "diff.plus" = { fg = "green" }
+    "diff.plus.gutter" = { fg = "green" }
+  "diff.minus" = { fg = "red" }
+    "diff.minus.gutter" = { fg = "red" }
+  "diff.delta" = { fg = "cyan" }
+    "diff.delta.moved" = { fg = "cyan" }
+    "diff.delta.conflict" = { fg = "orange" }
+    "diff.delta.gutter" = { fg = "yellow" }
+
+
+# Interface (no idea) TODO figure out what this is
+  # "markup.normal" = {}
+  #   "markup.normal.completion" = {}
+  #   "markup.normal.hover" = {}
+
+  #   "markup.heading.completion" = {}
+  #   "markup.heading.hover" = {}
+
+  #     "markup.raw.inline.completion" = {}
+  #     "markup.raw.inline.hover" = {}
+# ODOT
 
 [palette]
 red = "#e33400"
@@ -200,6 +327,12 @@ grey = "#818596"
 grey2 = "#c1c3cc"
 pureWhite = "#ffffff"
 pureBlack = "#000000"
+
+# Aliases to other colours so that things are more explicit and easiely
+# configurable
+callable = "#00a3cc" # cyan
+directValues = "#f2ce00" # yellow
+primitives = "#5ccc96" # green
 
 # Bright colours to debug stuff that don't show up or are yet to show up
 # anywhere
