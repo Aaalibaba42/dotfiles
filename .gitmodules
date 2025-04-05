@@ -1,3 +1,3 @@
 [submodule "control_modules"]
-	path = control_modules
+	path = hsh/workspace/perso/control_modules
 	url = git@github.com:Aaalibaba42/control_modules.git
