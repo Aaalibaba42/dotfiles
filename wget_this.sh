@@ -1,5 +1,16 @@
 #!/bin/sh
 
+#
+# # WARNING
+#
+# # This script has never been tested, not even ran once.
+# # I strongly advise against using it or taking it as a base for
+# # something custom.
+#
+# # I'll delete this message on my next install when this script will
+# # have ran successfully at least once.
+#
+
 user="$(whoami)"
 # `path//to//file` are valid posix file paths, I'd rather double them
 # most of the time and everything still work when I forget one
@@ -68,13 +79,14 @@ echo "Finished installing doas!"
 echo "Cloning dotfiles..."
 mkdir -p "$dotfiles_rep"
 install_bin git
-git clone git@github.com:Aaalibaba42/dotfiles.git "$dotfiles_rep"
+# Recursive for the control_modules
+git clone --recursive git@github.com:Aaalibaba42/dotfiles.git "$dotfiles_rep"
 echo "Cloned dotfiles!"
 
 # We want to have parralel Downloads before installing stuff required,
 # so it's better to start by moving at least that part of the config
 echo "Activating Parrallel Downloads"
-cp "$dotfiles_rep/etc/pacman.conf" /etc/pacman.conf
+doas cp "$dotfiles_rep/etc/pacman.conf" /etc/pacman.conf
 echo "Parrellel Downloads activated!"
 
 echo "Setting up chaotic AUR..."
@@ -94,7 +106,7 @@ doas pacman -S $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
 echo "Finished installing truckload of stuff!"
 
 echo "Installing Rust (required for paru)..."
-rustup install stable
+rustup install stable nightly
 echo "Finished installing Rust!"
 
 echo "Installing paru..."
@@ -103,16 +115,27 @@ makepkg -si -D "$tmpdir/paru/"
 echo "Finished installing Paru!"
 
 echo "Installing AUR packages"
-doas pacman -S $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
+# I actually *need* word splitting here, the pacman.packages should not
+# contain spaces.
+doas paru -S $(tr '\n' ' ' < "$dotfiles_rep/paru.packages")
 echo "Finished install of AUR packages!"
 
-# TODO config symlinks
+# config symlinks
+ln -s "$dotfiles_rep/.gitconfig" "$home/.gitconfig"
+ln -s "$dotfiles_rep/.config/gitcfg" "$config/gitcfg"
+
+ln -s "$dotfiles_rep/.config/rofi" "$config/rofi"
+ln -s "$dotfiles_rep/.config/waybar" "$config/waybar"
+ln -s "$dotfiles_rep/.config/swaylock" "$config/swaylock"
+ln -s "$dotfiles_rep/.config/kitty" "$config/kitty"
+ln -s "$dotfiles_rep/.config/hypr" "$config/hypr"
+ln -s "$dotfiles_rep/.config/helix" "$config/helix"
 
 # TODO nix
 
 # groups/user config
 echo "Creating groups and attributing them to $user..."
-doas group add nix-users docker
+doas groupadd nix-users docker
 doas usermod -aG "docker,nix-users" "$user"
 echo "Created and assigned groups for $user!"
 
