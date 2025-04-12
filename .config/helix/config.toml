@@ -128,14 +128,14 @@ select = "block"
 
 [editor.file-picker]
 # basicly some of the things to ignore for the file picker, pretty much self explanatory
-hidden = false
+hidden = true
 follow-symlinks = true
 deduplicate-links = true
 parents = false
-ignore = false
-git-ignore = false
-git-global = false
-git-exclude = false
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
 # unset for no limit
 # max-depth
 

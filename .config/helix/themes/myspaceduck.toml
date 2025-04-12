@@ -194,7 +194,7 @@
   "constant.builtin" = { fg = "primitives" }
     "constant.builtin.boolean" = { fg = "directValues" }
   "constant.character" = { fg = "directValues" }
-    "constant.character.escape" = { modifiers = [ "bold", "italic" ]}
+    "constant.character.escape" = { fg = "green", modifiers = [ "bold", "italic" ]}
   "constant.numeric" = { fg = "directValues" }
     "constant.numeric.integer" = { fg = "directValues" }
     "constant.numeric.float" = { fg = "directValues" }
