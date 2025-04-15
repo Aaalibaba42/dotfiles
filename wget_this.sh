@@ -43,7 +43,7 @@ safe_cleanup() {
   doas rm -rf "$tmpdir"
 
   # Remove the no password option
-  echo "permit $user as root" | doas tee /etc/doas.conf
+  echo "permit persist $user as root" | doas tee /etc/doas.conf
 
   echo "Done cleaning!"
 }
@@ -69,7 +69,7 @@ if [ ! -x "$(which doas)" ]; then
   fi
 
   sudo pacman -S doas
-  echo "permit nopass $user as root" | sudo tee /etc/doas.conf
+  echo "permit persist nopass $user as root" | sudo tee /etc/doas.conf
   # This is kinda dirty, but it's written in the archwiki so ima trust
   # it
   doas ln -s "$(which doas)" /usr/bin/sudo
@@ -93,10 +93,13 @@ echo "Setting up chaotic AUR..."
 doas pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 doas pacman-key --lsign-key 3056513887B78AEB
 
-doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-doas pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+doas pacman -U \
+  'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+doas pacman -U \
+  'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
-printf "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | doas tee -a /etc/pacman.conf
+printf "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" \
+  | doas tee -a /etc/pacman.conf
 echo "Finished setting up chaotic AUR!"
 
 echo "Installing truckload of stuff..."
@@ -140,7 +143,8 @@ doas usermod -aG "docker,nix-users" "$user"
 echo "Created and assigned groups for $user!"
 
 # ssh/gpg
-echo "YOU NEED TO DO SOME THINGS NOW:"
+echo "Creating the ssh and gpg keys..."
+echo "\e[41;35mYOU NEED TO DO SOME THINGS NOW:\e[0m"
 echo "Create your *personal* ssh key"
 ssh-keygen -t rsa -b 4096 -C "jules@wiriath.com"
 printf "Which name did you give the key (~/.ssh/{name}) ? "
@@ -155,12 +159,28 @@ echo "Create your *personal* gpg key"
 gpg --full-generate-key
 
 # gpg to git config (ssh should be automagically correct with the .ssh/config)
-gpg_pro_key=$(gpg --list-key "Jules Wiriath <$email_pro>" | head -n 2 | tail -n 1 | cut -d ' ' -f 7)
-gpg_perso_key=$(gpg --list-key "Jules Wiriath <jules@wiriath.com>" | head -n 2 | tail -n 1 | cut -d ' ' -f 7)
-sed -i "s/signingkey = \(.*\)/signingkey = $gpg_pro_key/g" "$config/gitcfg/hexaglobe"
-sed -i "s/signingkey = \(.*\)/signingkey = $gpg_perso_key/g" "$config/gitcfg/perso"
+gpg_pro_key=$(gpg --list-key "Jules Wiriath <$email_pro>" \
+  | head -n 2 \
+  | tail -n 1 \
+  | cut -d ' ' -f 7)
+gpg_perso_key=$(gpg --list-key "Jules Wiriath <jules@wiriath.com>" \
+  | head -n 2 \
+  | tail -n 1 \
+  | cut -d ' ' -f 7)
+sed -i "s/signingkey = \(.*\)/signingkey = $gpg_pro_key/g" \
+  "$config/gitcfg/hexaglobe"
+sed -i "s/signingkey = \(.*\)/signingkey = $gpg_perso_key/g" \
+  "$config/gitcfg/perso"
+echo "Created and setup the ssh and gpg keys!"
 
-# TODO decrypt perso.tar.enc smhtng file in /home/$user/hsh/perso
+# decrypt personal vault
+echo "Decrypting the personal vault..."
+echo "\e[41;35mYOU NEED TO DO SOME THINGS NOW:\e[0m"
+openssl enc -d -aes-256-cbc -in "$dotfiles_rep/hsh/perso.tar.gz.enc" \
+  -out "$hsh/perso.tar.gz"
+tar -xzf "$hsh/perso.tar.gz"
+echo "Decrypted the personal vault!"
+
 
 safe_cleanup
 
