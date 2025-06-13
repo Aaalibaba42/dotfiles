@@ -1,12 +1,5 @@
-[user]
-	name = Jules Wiriath
-	email = jules@wiriath.com
-
 [advice]
 	detachedHead = false
-
-[core]
-	editor = helix
 
 [color]
 	ui = always
@@ -15,29 +8,36 @@
 	interactive = always
 	status = always
 
+[core]
+	editor = helix
+
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 
-[push]
-	autoSetupRemote = true
+[init]
+	defaultBranch = main
 
 [pull]
 	rebase = true
 
-[init]
-	defaultBranch = main
+[push]
+	autoSetupRemote = true
 
 [rerere]
 	enabled = true
 
-[includeIf "gitdir:~/hsh/workspace/hexa/"]
-	path = "~/.config/gitcfg/hexaglobe"
+[user]
+	name = Jules Wiriath
+	email = jules@wiriath.com
 
 [includeIf "gitdir:~/hsh/workspace/assistants/"]
 	path = "~/.config/gitcfg/epita"
+
+[includeIf "gitdir:~/hsh/workspace/hexa/"]
+	path = "~/.config/gitcfg/hexaglobe"
 
 [includeIf "gitdir:~/hsh/workspace/perso/"]
 	path = "~/.config/gitcfg/perso"
