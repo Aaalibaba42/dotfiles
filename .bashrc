@@ -19,43 +19,6 @@ alias l.='ls -A --color=always | grep --color=always "^\."'
 alias ll='ls -oh --color=always'
 alias lla='ls -oAh --color=always'
 
-# git TODO move those aliases to gitconfig
-alias gita='git add -A && git status'
-alias gitt='git tag -a -m msg'
-alias gitpt='git push --tags'
-alias gitpall='git push --follow-tags'
-function gitc()
-{
-    msg=""
-    for w in "$@"
-    do
-        msg="$msg $w"
-    done
-    git commit -m "$msg"
-}
-alias g='git'
-alias gitpom='git push origin main'
-alias gitf='git add -A && git commit -m "feat!: used urgent push alias" && git push'
-alias gits='git status'
-alias ga='git add'
-alias gr='git rm'
-alias gitrom='git rebase origin/main'
-alias gitromours='git rebase origin/main -X ours'
-alias gitromtheirs='git rebase origin/main -X theirs'
-alias gitrc='git rebase --continue; git status'
-function gitrco()
-{
-    git checkout --ours "$@"
-    git add "$@"
-    git status
-}
-function gitrct()
-{
-    git checkout --theirs "$@"
-    git add "$@"
-    git status
-}
-
 # builds
 alias extar='mv ~/Downloads/*.tar . && ex *.tar && rm *.tar'
 alias lgcc='gcc -o main -std=c23 -pedantic -Werror -Wall -Wextra -Wvla'
@@ -75,6 +38,7 @@ alias cfcpp='find . \( -name "*.cc"  \
 alias cm='cmake -S . -B build && cmake --build build --parallel'
 
 # general purpose
+alias g='git'
 alias du='du -h'
 alias reboot='shutdown -r now'
 alias shutdown='shutdown now'

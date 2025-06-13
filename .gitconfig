@@ -1,6 +1,80 @@
 [advice]
 	detachedHead = false
 
+[alias]
+	root = !cd $(git root)
+
+	deleted = ls-files --deleted
+	gitignored = ls-files -o -i --exclude-standard
+	modified = ls-files --modified
+	remotes = remote -v
+	staged = ls-files --staged
+	untracked = ls-files --other --exclude-standard
+
+	a = !git add -A && git s
+
+	b = branch
+	bd = branch -D
+
+	bs = bisect
+	bsb = bisect bad
+	bsg = bisect good
+	bsr = bisect reset
+
+	c = commit
+	ca = commit --amend
+	cane = commit --amend --no-edit
+	canera = commit --amend --no-edit --reset-author
+
+	co = checkout
+	col = checkout HEAD~1
+	ours = checkout --ours
+	theirs = checkout --theirs
+
+	d = diff
+	ds = diff --staged
+
+	gc = gc --prune=now --aggressive
+
+	l = log --oneline
+
+	p = push
+	pom = push origin main
+	pf = push --force-with-lease
+
+	pl = pull
+
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase -i
+	rbroot = rebase -i --root
+	rbskip = rebase --skip
+
+	rh = reset --hard
+
+	rmc = rm --cached -r
+	rmcf = rm --cached -rf
+
+	rmt = remote
+	rmta = remote add
+	rmtrm = remote rm
+	rmtv = remote -v
+
+	rs = reset --soft
+	rsthd = reset HEAD --
+
+	s = status
+
+	sh = stash
+	shd = stash drop
+	shl = stash list
+	shp = stash pop
+
+[apply]
+	ignorewhitespace = change
+	whitespace = nowarn
+
 [color]
 	ui = always
 	branch = always
@@ -9,13 +83,18 @@
 	status = always
 
 [core]
+	mergeoptions = --no-edit
 	editor = helix
+	whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
 
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+
+[help]
+	autocorrect = 1
 
 [init]
 	defaultBranch = main
@@ -24,6 +103,8 @@
 	rebase = true
 
 [push]
+	rebase = true
+	followTags = true
 	autoSetupRemote = true
 
 [rerere]
