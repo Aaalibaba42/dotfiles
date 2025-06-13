@@ -36,7 +36,11 @@
 
 	gc = gc --prune=now --aggressive
 
+	grep = grep -in
+
 	l = log --oneline
+
+	ls = ls-files
 
 	p = push
 	pom = push origin main
@@ -75,6 +79,9 @@
 	ignorewhitespace = change
 	whitespace = nowarn
 
+[branch]
+	autosetupmerge = true
+
 [color]
 	ui = always
 	branch = always
@@ -86,6 +93,10 @@
 	mergeoptions = --no-edit
 	editor = helix
 	whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
+
+[diff]
+	renamelimit = 0
+	renames = copy
 
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -106,6 +117,7 @@
 	rebase = true
 	followTags = true
 	autoSetupRemote = true
+	default = upstream
 
 [rerere]
 	enabled = true
