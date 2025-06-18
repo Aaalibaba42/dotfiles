@@ -198,7 +198,7 @@ enable = true
 supersede-menu = false
 
 [editor.inline-diagnostics]
-cursor-line = "warning"
+cursor-line = "error"
 other-lines = "error"
 prefix-len = 2
 max-wrap = 20

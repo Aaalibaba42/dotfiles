@@ -2,7 +2,7 @@
 	detachedHead = false
 
 [alias]
-	root = !cd $(git root)
+	root = !cd $(git rev-parse --show-toplevel)
 
 	deleted = ls-files --deleted
 	gitignored = ls-files -o -i --exclude-standard
@@ -77,10 +77,10 @@
 	sw = switch
 	swc = switch -c
 
-	sh = stash
-	shd = stash drop
-	shl = stash list
-	shp = stash pop
+	st = stash
+	std = stash drop
+	stl = stash list
+	stp = stash pop
 
 [apply]
 	ignorewhitespace = change
