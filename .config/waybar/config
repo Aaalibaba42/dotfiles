@@ -34,6 +34,9 @@
 		"cpu",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
+		"temperature",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
 		"battery",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -127,6 +130,21 @@
         "on-click": "killall cpu_controller; rm /tmp/cpu_controller.*; cpu_controller",
         "on-click-right": "$TERMINAL -e htop --sort-key PERCENT_CPU"
 	},
+
+	"temperature": {
+		"format": "{icon}{temperatureC}°C",
+		"interval": 1,
+		"format-icons": [
+			"", // These should be unreachable
+			"", // These should be unreachable
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+
 
 	"battery": {
         "interval": 5,
