@@ -13,7 +13,7 @@ window#waybar {
 #custom-left-arrow-dark,
 #custom-right-arrow-light,
 #custom-left-arrow-light {
-	font-size: 35px;
+	font-size: 25px;
 }
 
 #custom-menu {
@@ -78,10 +78,6 @@ window#waybar {
 
 #cpu {
 	color: #b3a1e6;
-}
-
-#temperature {
-	color: #5ccc96;
 }
 
 #temperature {

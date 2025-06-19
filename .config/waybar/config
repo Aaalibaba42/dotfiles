@@ -132,16 +132,17 @@
 	},
 
 	"temperature": {
-		"format": "{icon}{temperatureC}°C",
+		"format": "{icon} {temperatureC}°C",
 		"interval": 1,
 		"format-icons": [
 			"", // These should be unreachable
-			"", // These should be unreachable
+			"",
 			"",
 			"",
 			"",
 			"",
-			""
+			"",
+			"󰈸"
 		]
 	},
 
