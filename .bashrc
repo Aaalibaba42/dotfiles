@@ -112,6 +112,6 @@ uwufetch
 # Temporary function to change as needed
 function tmp()
 {
-    echo "Not set"
+    doas find /home/ali/hsh/workspace/hexa/liveencoder-debian-packages-builder/volume_dir/debian-ffmpeg -type f -exec chmod ug+rw,o+rw {} \;
 }
 . "$HOME/.cargo/env"
