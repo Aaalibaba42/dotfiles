@@ -32,8 +32,12 @@
 	ours = checkout --ours
 	theirs = checkout --theirs
 
+	cl = clone
+
 	d = diff
 	ds = diff --staged
+
+	f = fetch
 
 	gc = gc --prune=now --aggressive
 
@@ -45,7 +49,7 @@
 
 	p = push
 	pom = push origin main
-	pf = push --force-with-lease
+	pf = push --force-with-lease --force-if-includes
 
 	pl = pull
 
@@ -88,28 +92,45 @@
 
 [branch]
 	autosetupmerge = true
+	sort = -committerdate
 
 [color]
-	ui = always
 	branch = always
 	diff = always
 	interactive = always
 	status = always
+	ui = always
+
+[commit]
+	verbose = true
 
 [core]
-	mergeoptions = --no-edit
+	autocrlf = false
 	editor = helix
+	mergeoptions = --no-edit
+	pager = delta
 	whitespace = trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
+
+[delta]
+	dark = true
+	line-numbers = true
+	navigate = true
+	true-color = always
 
 [diff]
 	renamelimit = 0
 	renames = copy
+	submodule = log
+
+[fetch]
+	prune = true
+	recurseSubmodules = true
 
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
+	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
 	required = true
-	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 
 [help]
 	autocorrect = 1
@@ -121,17 +142,17 @@
 	rebase = true
 
 [push]
-	rebase = true
-	followTags = true
 	autoSetupRemote = true
 	default = upstream
+	followTags = true
+	rebase = true
 
 [rerere]
 	enabled = true
 
 [user]
-	name = Jules Wiriath
 	email = jules@wiriath.com
+	name = Jules Wiriath
 
 [includeIf "gitdir:~/hsh/workspace/assistants/"]
 	path = "~/.config/gitcfg/epita"
