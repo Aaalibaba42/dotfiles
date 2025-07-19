@@ -37,6 +37,9 @@ alias cfcpp='find . \( -name "*.cc"  \
                 \) -exec clang-format -i {} +'
 alias cm='cmake -S . -B build && cmake --build build --parallel'
 
+# LadyBird fixme roulette
+alias lbr="grep -rin --include='*.c' --include='*.h' --include='*.cpp' --exclude-dir='Build' --include='*.hpp' -e 'FIXME' -e 'TODO' \$(g root) 2>/dev/null | shuf -n 5"
+
 # general purpose
 alias g='git'
 alias du='du -h'
@@ -56,6 +59,7 @@ alias 6.='cd ../../../../../..'
 alias 7.='cd ../../../../../../..'
 alias 8.='cd ../../../../../../../..'
 alias 9.='cd ../../../../../../../../..'
+alias groot='cd $(g root)'
 alias perg='grep --color=always -vi'
 alias cp='cp -ri'
 alias mv='mv -i'
@@ -71,7 +75,7 @@ alias grep='grep --color=always -n'
 # Pacman
 alias spacman='doas pacman'
 alias spacmans='doas pacman -S --noconfirm'
-alias pacsyu='doas pacman -Syy --noconfirm archlinux-keyring; paru -Syu --noconfirm'
+alias pacsyu='doas pacman -Syy --noconfirm archlinux-keyring chaotic-keyring; paru -Syu --noconfirm'
 alias spacmanr='doas pacman -Rsn'
 alias pacsearch='pacman -Ss'
 alias parsearch='paru -Ss'
@@ -112,6 +116,9 @@ uwufetch
 # Temporary function to change as needed
 function tmp()
 {
-    doas find /home/ali/hsh/workspace/hexa/liveencoder-debian-packages-builder/volume_dir/debian-ffmpeg -type f -exec chmod ug+rw,o+rw {} \;
+    cpp main.cc -Itxx -o preprocessed_main.cc -D_TXX_MAIN -D_TXX_INPUT="bu120"
+    sed -i '/^#/d' preprocessed_main.cc
+    clang-format -i preprocessed_main.cc
+
 }
 . "$HOME/.cargo/env"

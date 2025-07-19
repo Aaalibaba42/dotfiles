@@ -22,6 +22,9 @@ ssh="$home/.ssh/"
 dotfiles_rep="$hsh/workspace/perso/dotfiles"
 tmpdir=$(mktemp -d)
 
+# FIXME this function is weird, check it out better later:
+# Why packages are separated with ':',
+# Why there is a executable in path <=> package name assumption
 install_bins() {
   to_install=""
   for bin in "$@"; do
@@ -72,6 +75,7 @@ if [ ! -x "$(which doas)" ]; then
   echo "permit persist nopass $user as root" | sudo tee /etc/doas.conf
   # This is kinda dirty, but it's written in the archwiki so ima trust
   # it
+  # FIXME Uninstall sudo before symlinking its binary
   doas ln -s "$(which doas)" /usr/bin/sudo
 fi
 echo "Finished installing doas!"
