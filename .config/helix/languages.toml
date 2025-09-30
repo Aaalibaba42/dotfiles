@@ -1,29 +1,3 @@
-[[language]]
-name = "rust"
-auto-format = true
-
-roots = [
-  "Cargo.toml",
-  "Cargo.lock"
-]
-
-[language.auto-pairs]
-'(' = ')'
-'{' = '}'
-'[' = ']'
-'"' = '"'
-'`' = '`'
-
-[language-server.rust-analyzer]
-command = "rust-analyzer"
-
-[language-server.rust-analyzer.config]
-inlayHints.bindingModeHints.enable = false
-inlayHints.closingBraceHints.minLines = 10
-inlayHints.closureReturnTypeHints.enable = "with_block"
-inlayHints.discriminantHints.enable = "fieldless"
-inlayHints.typeHints.hideClosureInitialization = false
-
 [language-server.clangd]
 command = "clangd"
 args = [ "--function-arg-placeholders", "--completion-style=detailed", "--clang-tidy", "--log=verbose" ]

@@ -75,7 +75,7 @@ alias grep='grep --color=always -n'
 # Pacman
 alias spacman='doas pacman'
 alias spacmans='doas pacman -S --noconfirm'
-alias pacsyu='doas pacman -Syy --noconfirm archlinux-keyring chaotic-keyring; paru -Syu --noconfirm'
+alias pacsyu='doas pacman -Syy --noconfirm archlinux-keyring chaotic-keyring; paru -Syu --noconfirm; cargo install-update -a'
 alias spacmanr='doas pacman -Rsn'
 alias pacsearch='pacman -Ss'
 alias parsearch='paru -Ss'

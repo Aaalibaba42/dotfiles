@@ -43,6 +43,7 @@ patch
 pavucontrol
 pkgconf
 pkgconf
+qbittorrent
 qt5
 rofi-wayland
 rust-analyzer
