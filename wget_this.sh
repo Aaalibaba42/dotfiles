@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -xeu
+
 #
 # # WARNING
 #
@@ -22,20 +24,8 @@ ssh="$home/.ssh/"
 dotfiles_rep="$hsh/workspace/perso/dotfiles"
 tmpdir=$(mktemp -d)
 
-# FIXME this function is weird, check it out better later:
-# Why packages are separated with ':',
-# Why there is a executable in path <=> package name assumption
 install_bins() {
-  to_install=""
-  for bin in "$@"; do
-    if [ ! -x "$(which "$bin")" ]; then
-      to_install="$to_install:$bin"
-    else
-      echo "'$bin' already installed, skipping..." >&2
-    fi
-  done
-
-  doas pacman --no-confirm -S $to_install
+  doas pacman --noconfirm -S "$@"
 }
 
 # Add stuff here when you create artifacts. Use absolute path here since
@@ -71,20 +61,21 @@ if [ ! -x "$(which doas)" ]; then
     exit 1
   fi
 
-  sudo pacman -S doas
-  echo "permit persist nopass $user as root" | sudo tee /etc/doas.conf
+  sudo pacman --noconfirm -S doas
+  echo "permit nopass $user as root" | sudo tee /etc/doas.conf
   # This is kinda dirty, but it's written in the archwiki so ima trust
   # it
-  # FIXME Uninstall sudo before symlinking its binary
+  doas pacman --noconfirm -R sudo
   doas ln -s "$(which doas)" /usr/bin/sudo
 fi
 echo "Finished installing doas!"
 
 echo "Cloning dotfiles..."
 mkdir -p "$dotfiles_rep"
-install_bin git
+install_bins git
 # Recursive for the control_modules
-git clone --recursive git@github.com:Aaalibaba42/dotfiles.git "$dotfiles_rep"
+# TODO After the setup, change the remote to be ssh instead of http
+git clone "https://github.com/Aaalibaba42/dotfiles.git" "$dotfiles_rep"
 echo "Cloned dotfiles!"
 
 # We want to have parralel Downloads before installing stuff required,
@@ -97,19 +88,21 @@ echo "Setting up chaotic AUR..."
 doas pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 doas pacman-key --lsign-key 3056513887B78AEB
 
-doas pacman -U \
+doas pacman --noconfirm -U \
   'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-doas pacman -U \
+doas pacman --noconfirm -U \
   'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
-printf "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" \
+printf "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\n" \
   | doas tee -a /etc/pacman.conf
+
+doas pacman --noconfirm -Sy
 echo "Finished setting up chaotic AUR!"
 
 echo "Installing truckload of stuff..."
 # I actually *need* word splitting here, the pacman.packages should not
 # contain spaces.
-doas pacman -S $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
+doas pacman --noconfirm -S $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
 echo "Finished installing truckload of stuff!"
 
 echo "Installing Rust (required for paru)..."
@@ -124,7 +117,7 @@ echo "Finished installing Paru!"
 echo "Installing AUR packages"
 # I actually *need* word splitting here, the pacman.packages should not
 # contain spaces.
-doas paru -S $(tr '\n' ' ' < "$dotfiles_rep/paru.packages")
+paru --noconfirm  -S $(tr '\n' ' ' < "$dotfiles_rep/paru.packages")
 echo "Finished install of AUR packages!"
 
 # config symlinks
@@ -179,7 +172,6 @@ echo "Created and setup the ssh and gpg keys!"
 
 # decrypt personal vault
 echo "Decrypting the personal vault..."
-echo "\e[41;35mYOU NEED TO DO SOME THINGS NOW:\e[0m"
 openssl enc -d -aes-256-cbc -in "$dotfiles_rep/hsh/perso.tar.gz.enc" \
   -out "$hsh/perso.tar.gz"
 tar -xzf "$hsh/perso.tar.gz"
@@ -189,7 +181,7 @@ echo "Decrypted the personal vault!"
 safe_cleanup
 
 echo "Some of the things we did require full system resync and upgrade."
-doas pacman -Syyu
+doas pacman --noconfirm -Syyu
 
 echo "You are very much advised to reboot your komputer."
 
