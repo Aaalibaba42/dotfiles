@@ -5,18 +5,17 @@ set -xeu
 #
 # # WARNING
 #
-# # This script has never been tested, not even ran once.
-# # I strongly advise against using it or taking it as a base for
-# # something custom.
+# # This script has never been tested, not even ran once. I strongly advise
+# # against using it or taking it as a base for something custom.
 #
-# # I'll delete this message on my next install when this script will
-# # have ran successfully at least once.
+# # I'll delete this message on my next install when this script will have ran
+# # successfully at least once.
 #
 
 user="$(whoami)"
-# `path//to//file` are valid posix file paths, I'd rather double them
-# most of the time and everything still work when I forget one
-# than breaking something for a small mistake
+# `path//to//file` are valid posix file paths, I'd rather double the slashes
+# most of the time and everything still work when I forget one than breaking
+# something for a small mistake
 home="/home/$user/"
 hsh="$home/hsh/"
 config="$home/.config/"
@@ -41,6 +40,15 @@ safe_cleanup() {
   echo "Done cleaning!"
 }
 
+make_sym() {
+  source="$1"
+  dest="$2"
+  
+  [ -e "$source" ] && rm -rf "$source"
+
+  ln -s "$source" "$dest"
+}
+
 if [ "$(whoami)" = "root" ]; then
   echo "Do not run this script as super user"
   exit 1
@@ -62,24 +70,29 @@ if [ ! -x "$(which doas)" ]; then
   fi
 
   sudo pacman --noconfirm -S doas
+  # During the script, we set nopass to not bother the user with a password
+  # everytime. The `cleanup()` function should change that after the script has
+  # run.
   echo "permit nopass $user as root" | sudo tee /etc/doas.conf
   # This is kinda dirty, but it's written in the archwiki so ima trust
   # it
-  doas pacman --noconfirm -R sudo
+  doas rm /usr/bin/sudo
   doas ln -s "$(which doas)" /usr/bin/sudo
+else
+  echo "doas was already installed."
 fi
 echo "Finished installing doas!"
 
-echo "Cloning dotfiles..."
+echo "Cloning dotfiles (no ssh, no recursive)..."
 mkdir -p "$dotfiles_rep"
 install_bins git
-# Recursive for the control_modules
-# TODO After the setup, change the remote to be ssh instead of http
+# TODO After the setup, change the remote to be ssh instead of http, and clone
+# recursively for control_modules
 git clone "https://github.com/Aaalibaba42/dotfiles.git" "$dotfiles_rep"
 echo "Cloned dotfiles!"
 
-# We want to have parralel Downloads before installing stuff required,
-# so it's better to start by moving at least that part of the config
+# We want to have parralel Downloads before installing stuff required, so it's
+# better to start by moving at least that part of the config
 echo "Activating Parrallel Downloads"
 doas cp "$dotfiles_rep/etc/pacman.conf" /etc/pacman.conf
 echo "Parrellel Downloads activated!"
@@ -102,7 +115,7 @@ echo "Finished setting up chaotic AUR!"
 echo "Installing truckload of stuff..."
 # I actually *need* word splitting here, the pacman.packages should not
 # contain spaces.
-doas pacman --noconfirm -S $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
+install_bins $(tr '\n' ' ' < "$dotfiles_rep/pacman.packages")
 echo "Finished installing truckload of stuff!"
 
 echo "Installing Rust (required for paru)..."
@@ -115,27 +128,28 @@ makepkg -si -D "$tmpdir/paru/"
 echo "Finished installing Paru!"
 
 echo "Installing AUR packages"
-# I actually *need* word splitting here, the pacman.packages should not
+# I actually *need* word splitting here, the paru.packages should not
 # contain spaces.
-paru --noconfirm  -S $(tr '\n' ' ' < "$dotfiles_rep/paru.packages")
+paru --noconfirm -S $(tr '\n' ' ' < "$dotfiles_rep/paru.packages")
 echo "Finished install of AUR packages!"
 
 # config symlinks
-ln -s "$dotfiles_rep/.gitconfig" "$home/.gitconfig"
-ln -s "$dotfiles_rep/.config/gitcfg" "$config/gitcfg"
-
-ln -s "$dotfiles_rep/.config/rofi" "$config/rofi"
-ln -s "$dotfiles_rep/.config/waybar" "$config/waybar"
-ln -s "$dotfiles_rep/.config/swaylock" "$config/swaylock"
-ln -s "$dotfiles_rep/.config/kitty" "$config/kitty"
-ln -s "$dotfiles_rep/.config/hypr" "$config/hypr"
-ln -s "$dotfiles_rep/.config/helix" "$config/helix"
+make_sym "$dotfiles_rep/.gitconfig" "$home/.gitconfig"
+make_sym "$dotfiles_rep/.config/gitcfg" "$config/gitcfg"
+make_sym "$dotfiles_rep/.bashrc" "$home/.bashrc"
+make_sym "$dotfiles_rep/.config/rofi" "$config/rofi"
+make_sym "$dotfiles_rep/.config/waybar" "$config/waybar"
+make_sym "$dotfiles_rep/.config/swaylock" "$config/swaylock"
+make_sym "$dotfiles_rep/.config/kitty" "$config/kitty"
+make_sym "$dotfiles_rep/.config/hypr" "$config/hypr"
+make_sym "$dotfiles_rep/.config/helix" "$config/helix"
 
 # TODO nix
 
 # groups/user config
 echo "Creating groups and attributing them to $user..."
-doas groupadd nix-users docker
+doas groupadd nix-users
+doas groupadd docker
 doas usermod -aG "docker,nix-users" "$user"
 echo "Created and assigned groups for $user!"
 
@@ -150,9 +164,12 @@ read -r personal_ssh_key
 printf "Create your *professional* ssh key\nWhich email will this use ?\n"
 read -r email_pro
 ssh-keygen -t rsa -b 4096 -C "$email_pro"
+printf "Which name did you give the key (~/.ssh/{name}) ? "
 read -r professional_ssh_key
 
 echo "Create your *personal* gpg key"
+gpg --full-generate-key
+echo "Create your *professional* gpg key"
 gpg --full-generate-key
 
 # gpg to git config (ssh should be automagically correct with the .ssh/config)
@@ -165,7 +182,7 @@ gpg_perso_key=$(gpg --list-key "Jules Wiriath <jules@wiriath.com>" \
   | tail -n 1 \
   | cut -d ' ' -f 7)
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_pro_key/g" \
-  "$config/gitcfg/hexaglobe"
+  "$config/gitcfg/pro"
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_perso_key/g" \
   "$config/gitcfg/perso"
 echo "Created and setup the ssh and gpg keys!"
@@ -173,10 +190,9 @@ echo "Created and setup the ssh and gpg keys!"
 # decrypt personal vault
 echo "Decrypting the personal vault..."
 openssl enc -d -aes-256-cbc -in "$dotfiles_rep/hsh/perso.tar.gz.enc" \
-  -out "$hsh/perso.tar.gz"
-tar -xzf "$hsh/perso.tar.gz"
+  -out "$tmpdir/perso.tar.gz"
+tar -xzf "$tmpdir/perso.tar.gz" -C "$hsh/perso/"
 echo "Decrypted the personal vault!"
-
 
 safe_cleanup
 
