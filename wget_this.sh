@@ -76,8 +76,10 @@ if [ ! -x "$(which doas)" ]; then
   echo "permit nopass $user as root" | sudo tee /etc/doas.conf
   # This is kinda dirty, but it's written in the archwiki so ima trust
   # it
-  doas rm /usr/bin/sudo
-  doas ln -s "$(which doas)" /usr/bin/sudo
+  # FIXME doesn't really work, paru can be configured to use someting else, but
+  # makepkg seems to use sudo options doas don't have. ig I'll just keep boths.
+  # doas rm /usr/bin/sudo
+  # doas ln -s "$(which doas)" /usr/bin/sudo
 else
   echo "doas was already installed."
 fi
