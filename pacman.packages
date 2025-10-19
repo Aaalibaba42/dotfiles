@@ -69,6 +69,7 @@ podman-compose
 moreutils
 imagemagick
 audacity
+helix
 unrar
 docker
 docker-compose
