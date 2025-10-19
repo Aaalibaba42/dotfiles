@@ -151,7 +151,6 @@ make_sym "$dotfiles_rep/.config/helix" "$config/helix"
 # groups/user config
 echo "Creating groups and attributing them to $user..."
 doas groupadd nix-users
-doas groupadd docker
 doas usermod -aG "docker,nix-users" "$user"
 echo "Created and assigned groups for $user!"
 
