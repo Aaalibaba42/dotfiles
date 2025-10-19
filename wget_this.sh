@@ -44,7 +44,7 @@ make_sym() {
   source="$1"
   dest="$2"
   
-  [ -e "$source" ] && rm -rf "$source"
+  [ -e "$dest" ] && rm -rf "$dest"
 
   ln -s "$source" "$dest"
 }
