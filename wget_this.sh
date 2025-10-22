@@ -49,6 +49,29 @@ make_sym() {
   ln -s "$source" "$dest"
 }
 
+#!/bin/bash
+
+generate_gpg_key() {
+    name="$1"
+    email="$2"
+    key_type="${3:-RSA}"
+    key_length="${4:-4096}"
+    expire_date="${5:-0}"
+
+    gpg --batch --gen-key <<EOF
+Key-Type: $key_type
+Key-Length: $key_length
+Subkey-Type: $key_type
+Subkey-Length: $key_length
+Name-Real: $name
+Name-Email: $email
+Expire-Date: $expire_date
+%no-protection
+%commit
+EOF
+}
+
+
 if [ "$(whoami)" = "root" ]; then
   echo "Do not run this script as super user"
   exit 1
@@ -145,6 +168,7 @@ make_sym "$dotfiles_rep/.config/swaylock" "$config/swaylock"
 make_sym "$dotfiles_rep/.config/kitty" "$config/kitty"
 make_sym "$dotfiles_rep/.config/hypr" "$config/hypr"
 make_sym "$dotfiles_rep/.config/helix" "$config/helix"
+make_sym "$dotfiles_rep/hsh/wallpapers" "$hsh/wallpapers"
 
 # TODO nix
 
@@ -156,22 +180,18 @@ echo "Created and assigned groups for $user!"
 
 # ssh/gpg
 echo "Creating the ssh and gpg keys..."
-echo "\e[41;35mYOU NEED TO DO SOME THINGS NOW:\e[0m"
+printf "\e[41;35mYOU NEED TO DO SOME THINGS NOW:\e[0m"
 echo "Create your *personal* ssh key"
 ssh-keygen -t rsa -b 4096 -C "jules@wiriath.com"
-printf "Which name did you give the key (~/.ssh/{name}) ? "
-read -r personal_ssh_key
 
 printf "Create your *professional* ssh key\nWhich email will this use ?\n"
 read -r email_pro
 ssh-keygen -t rsa -b 4096 -C "$email_pro"
-printf "Which name did you give the key (~/.ssh/{name}) ? "
-read -r professional_ssh_key
 
-echo "Create your *personal* gpg key"
-gpg --full-generate-key
-echo "Create your *professional* gpg key"
-gpg --full-generate-key
+echo "Generating *personal* gpg key"
+generate_gpg_key "Jules Wiriath" "jules@wiriath.com" 
+echo "Generating *professional* gpg key"
+generate_gpg_key "Jules Wiriath" "$email_pro"
 
 # gpg to git config (ssh should be automagically correct with the .ssh/config)
 gpg_pro_key=$(gpg --list-key "Jules Wiriath <$email_pro>" \
@@ -182,7 +202,10 @@ gpg_perso_key=$(gpg --list-key "Jules Wiriath <jules@wiriath.com>" \
   | head -n 2 \
   | tail -n 1 \
   | cut -d ' ' -f 7)
+echo "Adding gpg and mail to git configuration"
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_pro_key/g" \
+  "$config/gitcfg/pro"
+sed -i "s/email = \(.*\)/email = $email_pro/g" \
   "$config/gitcfg/pro"
 sed -i "s/signingkey = \(.*\)/signingkey = $gpg_perso_key/g" \
   "$config/gitcfg/perso"
