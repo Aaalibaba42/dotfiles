@@ -41,6 +41,7 @@ alias cm='cmake -S . -B build && cmake --build build --parallel'
 alias lbr="grep -rin --include='*.c' --include='*.h' --include='*.cpp' --exclude-dir='Build' --include='*.hpp' -e 'FIXME' -e 'TODO' \$(g root) 2>/dev/null | shuf -n 5"
 
 # general purpose
+alias sudo='doas'
 alias g='git'
 alias du='du -h'
 alias reboot='shutdown -r now'
