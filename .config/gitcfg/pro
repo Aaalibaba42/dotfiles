@@ -1,7 +1,7 @@
 [user]
-	email = verymail@mailing.mail
+	email = jules.wiriath@datadoghq.com
 	name = Jules Wiriath
-	signingkey = greatkey
+	signingkey = 6E72123D04FE6B678963214A4609B31A6E037EF1
 
 [commit]
 	gpgSign = true
