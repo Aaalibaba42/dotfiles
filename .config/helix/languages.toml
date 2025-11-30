@@ -18,3 +18,31 @@ formatter = [ "clang-format" ]
 language-servers = ["clangd"]
 roots = [ ".git", "compile_commands.json" ]
 
+[[language]]
+name = "bqn"
+language-id = "bqn"
+file-types = ["bqn"]
+injection-regex = "bqn"
+scope = "source.bqn"
+roots = []
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+shebangs = ["BQN", "CBQN", "bqn", "cbqn"]
+language-servers = ["bqnlsp"]
+
+[[grammar]]
+name = "bqn"
+source.git = "https://github.com/shnarazk/tree-sitter-bqn"
+source.rev = "a56f2d20ee42d39afe67730eeb13c2f41e1b0877"
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+"'" = "'"
+'"' = '"'
+'⟨' = '⟩'
+
+[language-server.bqnlsp]
+command = "bqnlsp"
+

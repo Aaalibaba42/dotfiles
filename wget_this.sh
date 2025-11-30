@@ -169,6 +169,7 @@ make_sym "$dotfiles_rep/.config/kitty" "$config/kitty"
 make_sym "$dotfiles_rep/.config/hypr" "$config/hypr"
 make_sym "$dotfiles_rep/.config/helix" "$config/helix"
 make_sym "$dotfiles_rep/hsh/wallpapers" "$hsh/wallpapers"
+make_sym "$dotfiles_rep/.ssh/config" "$home/.ssh/config"
 
 # TODO nix
 
