@@ -1,344 +1,249 @@
-# placeholder with everything
-# key = {
-#     fg = "TODO",
-#     bg = "TODO",
-#     underline = {
-#         color = "TODO",
-#         style = "line curl dashed dotted double_line"
-#     },
-#     modifiers = [
-#         "bold",
-#         "dim",
-#         "italic",
-#         "slow_blink",
-#         "rapid_blink",
-#         "reversed",
-#         "hidden",
-#         "crossed_out"
-#     ]
-# }
+# Spaceduck theme for Helix
+# Based on: https://github.com/pineapplegiant/spaceduck
+# Author: Jules Wiriath
 
-### ----- HELIX UI ----- ###
+### ----- UI ----- ###
 
-# Background of the window
+# Background
 "ui.background" = { bg = "background" }
-# Separator in Space+f
-"ui.background.separator" = {}
+"ui.background.separator" = { fg = "darkPurple" }
 
-# Since every other cursor is set, I think this has no impact
-"ui.cursor" = { fg = "TODO_GREEN", bg = "TODO_PURPLE" }
-
-# With multiple cursors, the colour of non primary cursors
-"ui.cursor.normal" = {  bg = "darkPurple2" }
-"ui.cursor.select" = { bg = "darkPurple" }
+# Cursor
+"ui.cursor" = { fg = "background", bg = "foreground" }
+"ui.cursor.normal" = { bg = "darkPurple2" }
 "ui.cursor.insert" = { fg = "background", bg = "green" }
-
-# A matching pair (like '[' with ']', or '"' with '"'), how to display
-# the corresponding pair to the one under the cursor
-"ui.cursor.match" = { modifiers = [ "bold", "italic" ], underline = { color = "purple2", style = "double_line" } }
-
-# Since every other cursor is set, I think this has no impact
-"ui.cursor.primary" = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
-
-# The colour of primary cursors
-"ui.cursor.primary.normal" = { modifiers = [ "reversed" ] }
-# Since insert cursor is a bar, I don't think this matters
-# "ui.cursor.primary.insert" = { fg = "TODO_GREEN", bg = "TODO_PURPLE" }
+"ui.cursor.select" = { bg = "darkPurple" }
+"ui.cursor.match" = { fg = "orange", modifiers = ["bold"] }
+"ui.cursor.primary" = { fg = "background", bg = "foreground" }
+"ui.cursor.primary.normal" = { modifiers = ["reversed"] }
+"ui.cursor.primary.insert" = { fg = "background", bg = "green" }
 "ui.cursor.primary.select" = { bg = "darkPurple2" }
 
-# TODO use debug mode to figure out what you want for this
-"ui.debug.breakpoint" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
-"ui.debug.active" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
+# Debug
+"ui.debug" = { fg = "red" }
+"ui.debug.breakpoint" = { fg = "red" }
+"ui.debug.active" = { fg = "yellow" }
 
-# "gutter" is the thing on the left where number, diagnostics etc live
-# Colour of the gutter where the cursor (or secondary cursors) is not
+# Gutter
 "ui.gutter" = { bg = "cursorLine" }
-# Colour of the gutter where the cursor (or secondary) is
-"ui.gutter.selected" = { fg = "red", bg = "background" }
+"ui.gutter.selected" = { bg = "background" }
 
-# Line number in the gutter not where cursor (or secondary cursors) is
-"ui.linenr" = { fg = "yellow", bg = "cursorLine" }
-# Line number in the gutter where cursor (or secondary cursors) is
-"ui.linenr.selected" = { fg = "red", bg = "background" }
+# Line numbers
+"ui.linenr" = { fg = "darkPurple2" }
+"ui.linenr.selected" = { fg = "yellow" }
 
-# Thing down there
+# Statusline
 "ui.statusline" = { fg = "foreground", bg = "visualSelection" }
-# If another window (Space+w things), how to display the inactive ones
 "ui.statusline.inactive" = { fg = "foregroundDarkest", bg = "background" }
-# Nor|Ins|Sel indicator colours
-"ui.statusline.normal" = { fg = "foreground", bg = "purple2" }
-"ui.statusline.insert" = { fg = "background", bg = "yellow" }
-"ui.statusline.select" = { fg = "foreground", bg = "cyan" }
-# I don't have separators in the status line"
-"ui.statusline.separator" = { fg = "TODO_PURPLE", bg = "TODO_PURPLE" }
+"ui.statusline.normal" = { fg = "background", bg = "purple2", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "background", bg = "green", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "background", bg = "cyan", modifiers = ["bold"] }
+"ui.statusline.separator" = { fg = "darkPurple" }
 
-# Thing at the top, only active if multiple buffers are opened
+# Bufferline (tab bar)
 "ui.bufferline" = { fg = "foregroundDarkest", bg = "visualSelection" }
 "ui.bufferline.active" = { fg = "foreground", bg = "background" }
 "ui.bufferline.background" = { fg = "foregroundDarkest", bg = "visualSelection" }
 
-# Menus box like Space 
+# Popups (e.g. Space menu, documentation)
 "ui.popup" = { fg = "foreground", bg = "cursorLine" }
-# The border around these
 "ui.popup.info" = { fg = "yellow", bg = "visualSelection" }
 
-# TODO find out what that is < log says ui.picker not found
-# ui.picker.header = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
-# FIXME does not seem to work at all
-# ui.picker.header.column = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
-# ui.picker.header.column.active = { fg = "TODO_GREEN", bg = "TODO_GREEN" }
+# Picker header
+"ui.picker.header" = { fg = "foregroundDarkest" }
+"ui.picker.header.column" = { underline = { style = "line" } }
+"ui.picker.header.column.active" = { modifiers = ["bold"], underline = { style = "line" } }
 
-# Separator when multiple windows (vsplit)
+# Window borders (splits)
 "ui.window" = { fg = "purple2", bg = "darkPurple" }
-# When writing a command in the command mode, the box explaining the
-# command
-"ui.help" = { fg = "darkPurple2", bg = "cursorLine" }
+# Command help box
+"ui.help" = { fg = "foreground", bg = "cursorLine" }
 
-# Text of the ui, like the LSP messages, stuff like that
+# Text
 "ui.text" = { fg = "foreground" }
-# Current line in file picker (and probably other kinds of pickers)
 "ui.text.focus" = { fg = "foreground", bg = "visualSelection" }
-# For past searches and things like that
 "ui.text.inactive" = { fg = "foregroundDarkest" }
-# Text colour for the ui.popup.info
 "ui.text.info" = { fg = "foreground" }
+"ui.text.directory" = { fg = "cyan" }
 
-# FIXME helix says not found
-# "Directory names in prompt completion" tried `:o path/to/file` and the
-# directories weren't coloured, same for code completion `path/to/file`
-# ui.text.directory = { fg = "TODO_RED", bg = "TODO_YELLOW" }
-
-# Vertical lines at some configured columns (73&81 here to stay under
-# 72 or 80 chars)
+# Virtual/decorative text
+"ui.virtual" = { fg = "foregroundDarkest" }
 "ui.virtual.ruler" = { bg = "visualSelection" }
-
-# give special colours to whitespaces, who would want that
-"ui.virtual.whitespace" = { }
-# indent guides like what's left of this:
-  # 1 indent guides
-    # 2 indent guide
-  # 1 indent guides
+"ui.virtual.whitespace" = { fg = "darkPurple2" }
 "ui.virtual.indent-guide" = { fg = "foregroundDarkest" }
-
-# LSP help
 "ui.virtual.inlay-hint" = { fg = "foregroundDarkest", bg = "visualSelection" }
 "ui.virtual.inlay-hint.parameter" = { fg = "foregroundDarkest", bg = "visualSelection" }
 "ui.virtual.inlay-hint.type" = { fg = "foregroundDarkest", bg = "visualSelection" }
-
-# Wrap arrow indicator
 "ui.virtual.wrap" = { fg = "foregroundDarkest" }
-# g+w jump labels (like vimium extension o+l thing)
-"ui.virtual.jump-label" = { fg = "yellow", bg = "darkPurple"}
+"ui.virtual.jump-label" = { fg = "yellow", bg = "darkPurple", modifiers = ["bold"] }
 
-# Code and command completion menu, could be :, can be completion and
-# apparently loads of other stuff
+# Menus (completion, command palette)
 "ui.menu" = { fg = "foregroundDarkest", bg = "background" }
-# Selected item in those menu
 "ui.menu.selected" = { fg = "foreground", bg = "visualSelection" }
-# When many items, scrollbar thing (fg is only the thing, not the
-# scroll*bar*, bg appears useless)
-"ui.menu.scroll" = { fg = "darkPurple" }
+"ui.menu.scroll" = { fg = "darkPurple", bg = "background" }
 
-# Selection buffer colour, primary and secondary
+# Selection
 "ui.selection" = { bg = "visualSelection" }
 "ui.selection.primary" = { bg = "darkPurple2" }
 
-# When a search opens a picker (like g+r), line of what matched
-# highlighted
+# Highlights
 "ui.highlight" = { bg = "darkPurple" }
-# TODO Debug mode canondrum
-"ui.highlight.frameline" = { fg = "TODO_PURPLE", bg = "TODO_RED" }
+"ui.highlight.frameline" = { fg = "background", bg = "red" }
 
-# self explanatory
+# Cursor line/column
 "ui.cursorline.primary" = { bg = "cursorLine" }
-"ui.cursorline.secondary" = { }
+"ui.cursorline.secondary" = { bg = "visualSelection" }
+"ui.cursorcolumn.primary" = { bg = "cursorLine" }
+"ui.cursorcolumn.secondary" = { bg = "visualSelection" }
 
-# self explanatory
-"ui.cursorcolumn.primary" = { }
-"ui.cursorcolumn.secondary" = { }
+# Diagnostics (gutter)
+"warning" = { fg = "orange" }
+"error" = { fg = "red" }
+"info" = { fg = "cyan" }
+"hint" = { fg = "yellow" }
 
-# indicators
-"warning" = { fg = "background", bg = "orange", modifiers = [ "bold", "italic" ] }
-"error" = { fg = "background", bg = "red", modifiers = [ "bold", "italic" ] }
-"info" = { fg = "background", bg = "cyan", modifiers = [ "bold", "italic" ] }
-"hint" = { fg = "background", bg = "yellow", modifiers = [ "bold", "italic" ] }
-
-# Since every type of diagnostic is overridden, it should be okay
+# Diagnostics (editor)
 "diagnostic" = { modifiers = ["italic"], underline = { style = "curl" } }
-"diagnostic.info" = { underline = { color = "cyan" , style = "curl" }, modifiers = ["italic" ] }
-"diagnostic.deprecated" = { underline = { color = "purple" , style = "curl" }, modifiers = ["italic" ] }
-"diagnostic.unnecessary" = { underline = { color = "yellow" , style = "curl" }, modifiers = ["italic" ] }
-"diagnostic.warning" = { underline = { color = "orange" , style = "curl" }, modifiers = ["italic" ] }
-"diagnostic.error" = { underline = { color = "red" , style = "curl" }, modifiers = ["italic" ] }
+"diagnostic.hint" = { underline = { color = "yellow", style = "curl" } }
+"diagnostic.info" = { underline = { color = "cyan", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "curl" } }
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
 
-# TODO idk what this is "Snippet placeholder"
-"tabstop" = { fg = "TODO_RED", bg = "TODO_YELLOW" }
+# Snippet placeholder
+"tabstop" = { fg = "foreground", bg = "darkPurple" }
 
 
-### ----- SYNTAX TREESITTER ----- ###
+### ----- SYNTAX ----- ###
 
-# TODO Figure out
-"attributes" = { bg = "TODO_PURPLE" }
+"attribute" = { fg = "green", modifiers = ["italic"] }
 
 "type" = { fg = "green" }
-  "type.builtin" = { fg = "primitives" }
-  "type.parameter" = { bg = "TODO_BLUE" }
-  # enums and variant are control structures / language features in my mind
-  "type.enum" = { fg = "directValues" }
-    "type.enum.variant" = { fg = "directValues" }
+"type.builtin" = { fg = "green" }
+"type.parameter" = { fg = "cyan", modifiers = ["italic"] }
+"type.enum" = { fg = "yellow" }
+"type.enum.variant" = { fg = "yellow" }
 
-# TODO maybe a special colour or modifier for constructor could be useful
-"constructor" = { fg = "callable" }
+"constructor" = { fg = "green" }
 
-"constant" = { fg = "directValues" }
-  "constant.builtin" = { fg = "primitives" }
-    "constant.builtin.boolean" = { fg = "directValues" }
-  "constant.character" = { fg = "directValues" }
-    "constant.character.escape" = { fg = "green", modifiers = [ "bold", "italic" ]}
-  "constant.numeric" = { fg = "directValues" }
-    "constant.numeric.integer" = { fg = "directValues" }
-    "constant.numeric.float" = { fg = "directValues" }
+"constant" = { fg = "purple" }
+"constant.builtin" = { fg = "purple" }
+"constant.builtin.boolean" = { fg = "purple" }
+"constant.character" = { fg = "purple" }
+"constant.character.escape" = { fg = "green", modifiers = ["bold"] }
+"constant.numeric" = { fg = "yellow" }
+"constant.numeric.integer" = { fg = "yellow" }
+"constant.numeric.float" = { fg = "yellow" }
 
-"string" = { fg = "directValues" }
-  "string.regexp" = { fg = "directValues"}
-  "string.special" = { fg = "directValues" }
-    "string.special.path" = { fg = "directValues" }
-    "string.special.url" = { fg = "directValues" }
-    "string.special.symbol" = { fg = "directValues" }
+"string" = { fg = "yellow" }
+"string.regexp" = { fg = "orange" }
+"string.special" = { fg = "yellow" }
+"string.special.path" = { fg = "yellow" }
+"string.special.url" = { fg = "cyan", underline = { style = "line" } }
+"string.special.symbol" = { fg = "yellow" }
 
-"comment" = { fg = "grey2" }
-  # "comment.line" = {}
-  # "comment.block" = {}
-  #   "comment.documentation" = {}
+"comment" = { fg = "grey2", modifiers = ["italic"] }
+"comment.line" = { fg = "grey2", modifiers = ["italic"] }
+"comment.line.documentation" = { fg = "grey", modifiers = ["italic"] }
+"comment.block" = { fg = "grey2", modifiers = ["italic"] }
+"comment.block.documentation" = { fg = "grey", modifiers = ["italic"] }
 
 "variable" = { fg = "foreground" }
-  "variable.builtin" = { fg = "primitives" }
-  "variable.parameter" = { fg = "foreground" }
-  "variable.other" = { bg = "TODO_RED"}
-    "variable.other.member" = { fg = "foreground"}
-      "variable.other.member.private" = { bg = "TODO_PURPLE" }
+"variable.builtin" = { fg = "green" }
+"variable.parameter" = { fg = "foreground", modifiers = ["italic"] }
+"variable.other.member" = { fg = "foreground" }
 
-"label" = { bg = "purple2" }
+"label" = { fg = "cyan" }
 
 "punctuation" = { fg = "purple" }
-  "punctuation.delimiter" = { fg = "purple2" }
-  "punctuation.bracket" = { fg = "purple2" }
-  # Like tabs and stuff
-  # "punctuation.special" = {}
+"punctuation.delimiter" = { fg = "purple2" }
+"punctuation.bracket" = { fg = "purple2" }
+"punctuation.special" = { fg = "purple" }
+
+"operator" = { fg = "cyan" }
 
 "keyword" = { fg = "orange" }
-  "keyword.control" = { fg = "orange" }
-    # "keyword.control.conditional" = { fg = "cyan" }
-    # "keyword.control.repeat" = { fg = "cyan" }
-    # "keyword.control.import" = { fg = "cyan" }
-    # "keyword.control.return" = { fg = "cyan" }
-    # "keyword.control.exception" = { fg = "cyan" }
-  "keyword.operator" = { fg = "callable" }
-  "keyword.directive" = { fg = "primitives" }
+"keyword.control" = { fg = "orange" }
+"keyword.control.conditional" = { fg = "orange" }
+"keyword.control.repeat" = { fg = "orange" }
+"keyword.control.import" = { fg = "purple" }
+"keyword.control.return" = { fg = "orange" }
+"keyword.control.exception" = { fg = "orange" }
+"keyword.operator" = { fg = "cyan" }
+"keyword.directive" = { fg = "green" }
+"keyword.function" = { fg = "orange" }
+"keyword.storage" = { fg = "purple2" }
+"keyword.storage.type" = { fg = "purple2" }
+"keyword.storage.modifier" = { fg = "purple2" }
 
-"function" = { fg = "callable" }
-  "function.builtin" = { fg = "primitives" }
-  "function.method" = { fg = "callable" }
-    "function.method.private" = { fg = "callable" }
-  "function.macro" = { fg = "callable" }
-  "function.special" = { fg = "callable" }
-
-"storage" = { fg = "purple2" }
-  "storage.type" = { fg = "purple2" }
-  "storage.modifier" = { fg = "purple2"}
+"function" = { fg = "green" }
+"function.builtin" = { fg = "green" }
+"function.method" = { fg = "green" }
+"function.macro" = { fg = "purple2" }
+"function.special" = { fg = "green" }
 
 "tag" = { fg = "purple" }
-  "tag.builtin" = { fg = "primitives" }
+"tag.builtin" = { fg = "green" }
 
-"namespace" = { fg = "purple"}
+"namespace" = { fg = "purple" }
 
-# Found this is Rust's "derive"... Ig I'll make them primitives
-"special" = { fg = "primitives", modifiers = [ "italic" ] }
+"special" = { fg = "magenta", modifiers = ["italic"] }
 
-# "markup" = {}
-  "markup.heading" = { fg = "purple2" }
-    "markup.heading.marker" = { fg = "purple" }
-  #   "markup.heading.1" = {}
-  #   "markup.heading.2" = {}
-  #   "markup.heading.3" = {}
-  #   "markup.heading.4" = {}
-  #   "markup.heading.5" = {}
-  #   "markup.heading.6" = {}
-  # "markup.list" = {}
-  #   "markup.list.unnumbered" = {}
-  #   "markup.list.numbered" = {}
-  #   "markup.list.checked" = {}
-  #   "markup.list.unchecked" = {}
-  "markup.bold" = { modifiers = ["bold"] }
-  "markup.italic" = { modifiers = ["italic"] }
-  "markup.strikethrough" = { modifiers = ["strikethrough"]}
-  # "markup.link" = {}
-  #   "markup.link.url" = {}
-  #   "markup.link.label" = {}
-  #   "markup.link.text" = {}
-  # "markup.quote" = {}
-  # "markup.raw" = {}
-  #   "markup.raw.inline" = {}
-  #   "markup.raw.block" = {}
+# Markup
+"markup.heading" = { fg = "purple2", modifiers = ["bold"] }
+"markup.heading.marker" = { fg = "purple" }
+"markup.heading.1" = { fg = "purple", modifiers = ["bold"] }
+"markup.list" = { fg = "cyan" }
+"markup.list.unnumbered" = { fg = "cyan" }
+"markup.list.numbered" = { fg = "cyan" }
+"markup.list.checked" = { fg = "green" }
+"markup.list.unchecked" = { fg = "grey" }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link" = { fg = "cyan" }
+"markup.link.url" = { fg = "cyan", underline = { style = "line" } }
+"markup.link.label" = { fg = "purple" }
+"markup.link.text" = { fg = "foreground" }
+"markup.quote" = { fg = "grey2", modifiers = ["italic"] }
+"markup.raw" = { fg = "green" }
+"markup.raw.inline" = { fg = "green" }
+"markup.raw.block" = { fg = "green" }
 
-# "diff" = {}
-  "diff.plus" = { fg = "green" }
-    "diff.plus.gutter" = { fg = "green" }
-  "diff.minus" = { fg = "red" }
-    "diff.minus.gutter" = { fg = "red" }
-  "diff.delta" = { fg = "cyan" }
-    "diff.delta.moved" = { fg = "cyan" }
-    "diff.delta.conflict" = { fg = "orange" }
-    "diff.delta.gutter" = { fg = "yellow" }
+# Diff
+"diff.plus" = { fg = "green" }
+"diff.plus.gutter" = { fg = "green" }
+"diff.minus" = { fg = "red" }
+"diff.minus.gutter" = { fg = "red" }
+"diff.delta" = { fg = "cyan" }
+"diff.delta.moved" = { fg = "cyan" }
+"diff.delta.conflict" = { fg = "orange" }
+"diff.delta.gutter" = { fg = "yellow" }
 
-
-# Interface (no idea) TODO figure out what this is
-  # "markup.normal" = {}
-  #   "markup.normal.completion" = {}
-  #   "markup.normal.hover" = {}
-
-  #   "markup.heading.completion" = {}
-  #   "markup.heading.hover" = {}
-
-  #     "markup.raw.inline.completion" = {}
-  #     "markup.raw.inline.hover" = {}
-# ODOT
+# Rainbow brackets
+rainbow = ["purple", "cyan", "yellow", "green", "orange", "magenta", "purple2"]
 
 [palette]
+# Core accent colors
 red = "#e33400"
 orange = "#e39400"
-green = "#5ccc96"
-forestGreen = "#003b1b"
 yellow = "#f2ce00"
+green = "#5ccc96"
+cyan = "#00a3cc"
 purple = "#b3a1e6"
 purple2 = "#7a5ccc"
-darkPurple = "#30365f"
-darkPurple2 = "#686f9a"
-cyan = "#00a3cc"
 magenta = "#ce6f8f"
 
+# UI colors
 background = "#0f111b"
 foreground = "#ecf0c1"
 foregroundDarkest = "#7d7f66"
-visualSelection = "#1b1c36"
 cursorLine = "#16172d"
+visualSelection = "#1b1c36"
+darkPurple = "#30365f"
+darkPurple2 = "#686f9a"
 
+# Neutral tones
 grey = "#818596"
 grey2 = "#c1c3cc"
-pureWhite = "#ffffff"
-pureBlack = "#000000"
-
-# Aliases to other colours so that things are more explicit and easiely
-# configurable
-callable = "#00a3cc" # cyan
-directValues = "#f2ce00" # yellow
-primitives = "#5ccc96" # green
-
-# Bright colours to debug stuff that don't show up or are yet to show up
-# anywhere
-TODO_RED = "#ff0000"
-TODO_GREEN = "#00ff00"
-TODO_BLUE = "#0000ff"
-TODO_CYAN = "#00ffff"
-TODO_PURPLE = "#ff00ff"
-TODO_YELLOW = "#ffff00"
